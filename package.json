@@ -1,0 +1,21 @@
+{
+  "name": "simple-user-adding",
+  "version": "1.0.0",
+  "description": "This plugin makes adding users to your WordPress site easier than ever before.",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:wearerequired/simple-user-adding.git"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-wp-i18n": "*",
+    "grunt-wp-readme-to-markdown": "*",
+    "load-grunt-config": "*",
+    "time-grunt": "*"
+  },
+  "dependencies": {
+    "time-grunt": "*"
+  }
+}
