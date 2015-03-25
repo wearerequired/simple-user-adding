@@ -18,7 +18,7 @@
 
 	<p><?php _e( 'Create a brand new user and add them to this site.', 'simple-user-adding' ); ?></p>
 
-	<form action="" method="post" name="sua_createuser" id="sua_createuser" novalidate>
+	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" name="sua_createuser" id="sua_createuser" novalidate>
 		<table class="form-table">
 			<tr>
 				<th scope="row">
@@ -38,6 +38,7 @@
 				</th>
 				<td>
 					<input type="email" id="sua_email" name="sua_email" class="regular-text" />
+
 					<div id="sua_email_note" class="hidden">
 						<p>
 							<?php printf( __( 'Is this %s?', 'simple-user-adding' ), '<span id="sua_email_name"></span>' ); ?>
@@ -97,6 +98,8 @@
 			</tr>
 		</table>
 
+		<input type="hidden" name="action" value="simple_user_adding">
+		<?php wp_nonce_field( 'simple-user-adding', 'simple_user_adding_nonce' ); ?>
 		<?php submit_button( __( 'Add New User', 'simple-user-adding' ), 'primary', 'submit' ); ?>
 	</form>
 </div>

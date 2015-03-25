@@ -39,6 +39,9 @@ final class Simple_User_Adding {
 		add_action( 'admin_menu', array( __CLASS__, 'add_plugin_admin_menu' ) );
 		add_filter( 'admin_footer_text', array( __CLASS__, 'add_admin_footer' ) );
 
+		// Handle form submissions
+		add_action( 'admin_post_simple_user_adding', array( __CLASS__, 'create_user' ) );
+
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
 	}
@@ -79,6 +82,26 @@ final class Simple_User_Adding {
 
 		wp_enqueue_style( 'sua-admin-styles', plugins_url( 'css/simple-user-adding.css', __FILE__ ), array(), self::VERSION );
 		wp_enqueue_script( 'sua-admin-script', plugins_url( 'js/simple-user-adding.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+	}
+
+	public static function create_user() {
+		if ( ! isset( $_POST['simple_user_adding_nonce'] )
+		     || ! wp_verify_nonce( $_POST['simple_user_adding_nonce'], 'simple-user-adding' )
+		) {
+			wp_redirect( add_query_arg(
+				array( 'message' => 'failure' ),
+				admin_url( 'users.php?page=simple-user-adding' )
+			) );
+			die();
+		}
+
+		// todo: process form
+
+		wp_redirect( add_query_arg(
+			array( 'message' => 'success' ),
+			admin_url( 'users.php?page=simple-user-adding' )
+		) );
+		die();
 	}
 
 }
