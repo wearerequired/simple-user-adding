@@ -61,10 +61,12 @@ final class Simple_User_Adding {
 
 	public static function admin_enqueue_scripts() {
 		$screen = get_current_screen();
-		if ( 'users_page_simple-user-adding' === $screen->id ) {
-			wp_enqueue_style( 'sua-admin-styles', plugins_url( 'css/simple-user-adding.css', __FILE__ ), array(), self::VERSION );
-			wp_enqueue_script( 'sua-admin-script', plugins_url( 'js/simple-user-adding.js', __FILE__ ), array( 'jquery' ), self::VERSION );
+		if ( 'users_page_simple-user-adding' !== $screen->id ) {
+			return;
 		}
+
+		wp_enqueue_style( 'sua-admin-styles', plugins_url( 'css/simple-user-adding.css', __FILE__ ), array(), self::VERSION );
+		wp_enqueue_script( 'sua-admin-script', plugins_url( 'js/simple-user-adding.js', __FILE__ ), array( 'jquery' ), self::VERSION );
 	}
 
 }

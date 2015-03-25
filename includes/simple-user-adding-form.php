@@ -38,6 +38,12 @@
 				</th>
 				<td>
 					<input type="email" id="sua_email" name="sua_email" class="regular-text" />
+					<div id="sua_email_note" class="hidden">
+						<p>
+							<?php printf( __( 'Is this %s?', 'simple-user-adding' ), '<span id="sua_email_name"></span>' ); ?>
+							<a href="#" id="sua_email_note_insert"><?php _e( 'Insert name', 'simple-user-adding' ); ?></a>
+						</p>
+					</div>
 				</td>
 			</tr>
 			<tr>
