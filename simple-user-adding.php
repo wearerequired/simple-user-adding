@@ -37,7 +37,7 @@ final class Simple_User_Adding {
 	public static function init() {
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( __CLASS__, 'add_plugin_admin_menu' ) );
-		//add_filter( 'admin_footer_text', array( __CLASS__, 'add_admin_footer' ) );
+		add_filter( 'admin_footer_text', array( __CLASS__, 'add_admin_footer' ) );
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
@@ -57,6 +57,18 @@ final class Simple_User_Adding {
 
 	public static function display_admin_page() {
 		include_once( plugin_dir_path( __FILE__ ) . '/includes/simple-user-adding-form.php' );
+	}
+
+	public static function add_admin_footer() {
+		$screen = get_current_screen();
+		if ( 'users_page_simple-user-adding' !== $screen->id ) {
+			return;
+		}
+
+		$text = sprintf( __( '%s is brought to you by %s. We &hearts; WordPress.', 'simple-user-adding' ), 'Simple User Adding', '<a href="http://required.ch">required+</a>' );
+		$text .= ' <a href="' . admin_url( 'user-new.php' ) . '">' . __( 'Looking for the original Add User form?', 'wp-widget-disable' ) . '</a>';
+
+		return $text;
 	}
 
 	public static function admin_enqueue_scripts() {
