@@ -87,9 +87,10 @@ final class Simple_User_Adding {
 	public static function create_user() {
 		if ( ! isset( $_POST['simple_user_adding_nonce'] )
 		     || ! wp_verify_nonce( $_POST['simple_user_adding_nonce'], 'simple-user-adding' )
+		     || ! current_user_can( 'create_users' )
 		) {
 			wp_redirect( add_query_arg(
-				array( 'message' => 'failure' ),
+				array( 'message' => '1' ),
 				admin_url( 'users.php?page=simple-user-adding' )
 			) );
 			die();
@@ -97,8 +98,23 @@ final class Simple_User_Adding {
 
 		// todo: process form
 
+		// Check required fields
+		if ( ! isset( $_POST['sua_username'] ) || empty( $_POST['sua_username'] )
+		     || ! isset( $_POST['sua_email'] ) || empty( $_POST['sua_email'] )
+		) {
+			wp_redirect( add_query_arg(
+				array( 'message' => '2' ),
+				admin_url( 'users.php?page=simple-user-adding' )
+			) );
+			die();
+		}
+
+		// todo: create & activate user
+
+		// todo: send email to user
+
 		wp_redirect( add_query_arg(
-			array( 'message' => 'success' ),
+			array( 'message' => '3' ),
 			admin_url( 'users.php?page=simple-user-adding' )
 		) );
 		die();

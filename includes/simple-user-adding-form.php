@@ -18,6 +18,36 @@
 
 	<p><?php _e( 'Create a brand new user and add them to this site.', 'simple-user-adding' ); ?></p>
 
+	<?php
+	$message = array();
+	if ( isset( $_GET['message'] ) ) {
+		switch ( $_GET['message'] ) {
+			case 1:
+				$message = array(
+					'class' => 'error',
+					'text'  => __( "You don't have the permissions to do that.", 'simple-user-adding' )
+				);
+				break;
+			case 2:
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'Required fields missing', 'simple-user-adding' )
+				);
+				break;
+			case 3:
+				$message = array(
+					'class' => 'updated',
+					'text'  => __( 'User successfully added.', 'simple-user-adding' )
+				);
+				break;
+		}
+	}
+
+	if ( ! empty( $message ) ) {
+		echo '<div id="message" class="' . esc_attr( $message['class'] ) . '"><p>' . esc_html( $message['text'] ) . '</p></div>';
+	}
+	?>
+
 	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" name="sua_createuser" id="sua_createuser" novalidate>
 		<table class="form-table">
 			<tr>
