@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Simple User Adding 1.0.0\n"
 "Report-Msgid-Bugs-To: http://required.ch\n"
-"POT-Creation-Date: 2015-03-25 16:21:42+00:00\n"
+"POT-Creation-Date: 2015-03-26 07:53:17+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,49 +28,185 @@ msgstr ""
 msgid "Create a brand new user and add them to this site."
 msgstr ""
 
-#: includes/simple-user-adding-form.php:25
+#: includes/simple-user-adding-form.php:28
+msgid "Required fields missing."
+msgstr ""
+
+#: includes/simple-user-adding-form.php:34
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: includes/simple-user-adding-form.php:40
+msgid "A user with this email address already exists."
+msgstr ""
+
+#: includes/simple-user-adding-form.php:46
+msgid "A user with this username already exists."
+msgstr ""
+
+#: includes/simple-user-adding-form.php:52
+msgid "User successfully added."
+msgstr ""
+
+#: includes/simple-user-adding-form.php:58
+msgid "There was an error adding the user. Please try again."
+msgstr ""
+
+#: includes/simple-user-adding-form.php:73
 msgid "Username"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:26
-#: includes/simple-user-adding-form.php:36
+#: includes/simple-user-adding-form.php:74
+#: includes/simple-user-adding-form.php:84
 msgid "(required)"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:35
+#: includes/simple-user-adding-form.php:83
 msgid "E-mail"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:45
+#: includes/simple-user-adding-form.php:92
+msgid "Is this %s?"
+msgstr ""
+
+#: includes/simple-user-adding-form.php:93
+msgid "Insert name"
+msgstr ""
+
+#: includes/simple-user-adding-form.php:100
 msgid "Role"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:55
+#: includes/simple-user-adding-form.php:110
 msgid "First Name"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:63
+#: includes/simple-user-adding-form.php:118
 msgid "Last Name"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:70
+#: includes/simple-user-adding-form.php:125
 msgid "Website"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:89
+#: includes/simple-user-adding-form.php:144
 msgid "Show More"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:89
+#: includes/simple-user-adding-form.php:144
 msgid "Show Less"
 msgstr ""
 
-#: includes/simple-user-adding-form.php:94 simple-user-adding.php:48
+#: includes/simple-user-adding-form.php:151 simple-user-adding.php:54
 msgid "Add New User"
 msgstr ""
 
-#: simple-user-adding.php:49
+#: simple-user-adding.php:55
 msgid "Add New"
+msgstr ""
+
+#: simple-user-adding.php:74
+msgid "%s is brought to you by %s. We &hearts; WordPress."
+msgstr ""
+
+#: simple-user-adding.php:75
+msgid "Looking for the original Add User form?"
+msgstr ""
+
+#: simple-user-adding.php:86
+msgid ""
+"To add a new user to your site, fill in the form on this screen and click "
+"the Add New User button at the bottom."
+msgstr ""
+
+#: simple-user-adding.php:89
+msgid ""
+"Because this is a multisite installation, you may add accounts that already "
+"exist on the Network by specifying a username or email, and defining a "
+"role. For more options, you have to be a Network Administrator and use the "
+"hover link under an existing user&#8217;s name to Edit the user profile "
+"under Network Admin > All Users."
+msgstr ""
+
+#: simple-user-adding.php:90
+msgid ""
+"New users will receive an email letting them know they&#8217;ve been added "
+"as a user for your site. This email will also contain their password."
+msgstr ""
+
+#: simple-user-adding.php:92
+msgid ""
+"New users will receive an email letting them know they&#8217;ve been added "
+"as a user for your site. This email will also contain their auto-generated "
+"password."
+msgstr ""
+
+#: simple-user-adding.php:95
+msgid ""
+"Remember to click the Add New User button at the bottom of this screen when "
+"you are finished."
+msgstr ""
+
+#: simple-user-adding.php:99
+msgid "Overview"
+msgstr ""
+
+#: simple-user-adding.php:105
+msgid "User Roles"
+msgstr ""
+
+#: simple-user-adding.php:106
+msgid ""
+"Here is a basic overview of the different user roles and the permissions "
+"associated with each one:"
+msgstr ""
+
+#: simple-user-adding.php:108
+msgid ""
+"Subscribers can read comments/comment/receive newsletters, etc. but cannot "
+"create regular site content."
+msgstr ""
+
+#: simple-user-adding.php:109
+msgid ""
+"Contributors can write and manage their posts but not publish posts or "
+"upload media files."
+msgstr ""
+
+#: simple-user-adding.php:110
+msgid ""
+"Authors can publish and manage their own posts, and are able to upload "
+"files."
+msgstr ""
+
+#: simple-user-adding.php:111
+msgid ""
+"Editors can publish posts, manage posts as well as manage other "
+"people&#8217;s posts, etc."
+msgstr ""
+
+#: simple-user-adding.php:112
+msgid "Administrators have access to all the administration features."
+msgstr ""
+
+#: simple-user-adding.php:117
+msgid "For more information:"
+msgstr ""
+
+#: simple-user-adding.php:118
+msgid ""
+"<a href=\"http://codex.wordpress.org/Users_Add_New_Screen\" "
+"target=\"_blank\">Documentation on Adding New Users</a>"
+msgstr ""
+
+#: simple-user-adding.php:119
+msgid ""
+"<a href=\"https://wordpress.org/support/\" target=\"_blank\">Support "
+"Forums</a>"
+msgstr ""
+
+#: simple-user-adding.php:141
+msgid "Cheatin&#8217; uh?"
 msgstr ""
 
 #. Plugin Name of the plugin/theme
