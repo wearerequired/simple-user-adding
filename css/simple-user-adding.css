@@ -6,3 +6,8 @@
 	float: left;
 	margin-left: 10px;
 }
+
+#notification_msg {
+	width: 500px;
+	height: 150px;
+}

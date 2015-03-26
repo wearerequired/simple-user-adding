@@ -144,6 +144,16 @@
 					</td>
 				</tr>
 			<?php endforeach ?>
+			<?php if ( Simple_User_Adding::$can_modify_email ) : ?>
+				<tr class="additional hidden">
+					<th scope="row"><label for="notification_msg"><?php _e( 'Message Text' ) ?></label></th>
+					<td>
+						<textarea name="notification_msg" id="notification_msg" class="regular-text"></textarea>
+
+						<p class="description"><?php _e( 'This text is shown to the user in the confirmation email they receive.' ); ?></p>
+					</td>
+				</tr>
+			<?php endif; ?>
 			<tr>
 				<th scope="row">
 				</th>
