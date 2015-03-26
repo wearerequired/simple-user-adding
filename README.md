@@ -2,6 +2,10 @@
 
 This plugin makes adding users to your WordPress site easier than ever before.
 
+## Screenshots
+
+![Screenshot 1](https://raw.githubusercontent.com/wearerequired/simple-user-adding/develop/assets/screenshot-1.png)
+
 ## Contributions
 
 If you would like to contribute to this plugin, report an isse or anything like that, please note that we develop this plugin on [GitHub](https://github.com/wearerequired/WP-Widget-Disable).
