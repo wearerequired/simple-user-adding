@@ -25,16 +25,10 @@
 			case 1:
 				$message = array(
 					'class' => 'error',
-					'text'  => __( "You don't have the permissions to do that.", 'simple-user-adding' )
-				);
-				break;
-			case 2:
-				$message = array(
-					'class' => 'error',
 					'text'  => __( 'Required fields missing', 'simple-user-adding' )
 				);
 				break;
-			case 3:
+			case 2:
 				$message = array(
 					'class' => 'updated',
 					'text'  => __( 'User successfully added.', 'simple-user-adding' )

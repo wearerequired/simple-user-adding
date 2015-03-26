@@ -85,16 +85,11 @@ final class Simple_User_Adding {
 	}
 
 	public static function create_user() {
-		if ( ! isset( $_POST['simple_user_adding_nonce'] )
-		     || ! wp_verify_nonce( $_POST['simple_user_adding_nonce'], 'simple-user-adding' )
-		     || ! current_user_can( 'create_users' )
-		) {
-			wp_redirect( add_query_arg(
-				array( 'message' => '1' ),
-				admin_url( 'users.php?page=simple-user-adding' )
-			) );
-			die();
-		}
+		/**
+		 * This checks for the correct referrer and the nonce.
+		 * On failure, the function dies after calling the wp_nonce_ays() function.
+		 */
+		check_admin_referer( 'simple-user-adding', 'simple_user_adding_nonce' );
 
 		// todo: process form
 
@@ -103,7 +98,7 @@ final class Simple_User_Adding {
 		     || ! isset( $_POST['sua_email'] ) || empty( $_POST['sua_email'] )
 		) {
 			wp_redirect( add_query_arg(
-				array( 'message' => '2' ),
+				array( 'message' => '1' ),
 				admin_url( 'users.php?page=simple-user-adding' )
 			) );
 			die();
@@ -114,7 +109,7 @@ final class Simple_User_Adding {
 		// todo: send email to user
 
 		wp_redirect( add_query_arg(
-			array( 'message' => '3' ),
+			array( 'message' => '2' ),
 			admin_url( 'users.php?page=simple-user-adding' )
 		) );
 		die();
