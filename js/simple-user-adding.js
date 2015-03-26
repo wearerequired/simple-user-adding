@@ -46,8 +46,8 @@
     // Show/hide additional fields on request
     $('#sua_showmore').click(function (e) {
       e.preventDefault();
-      $(this).text(additionalFieldsShown ? $(this).attr('data-less') : $(this).attr('data-more'));
       additionalFieldsShown = !additionalFieldsShown;
+      $(this).text(additionalFieldsShown ? $(this).attr('data-less') : $(this).attr('data-more'));
       $('#sua_createuser .additional').toggleClass('hidden');
     });
 
