@@ -35,6 +35,9 @@ final class Simple_User_Adding {
 	 * Add all hooks on init
 	 */
 	public static function init() {
+		// Load plugin text domain
+		add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
+
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( __CLASS__, 'add_plugin_admin_menu' ) );
 		add_filter( 'admin_footer_text', array( __CLASS__, 'add_admin_footer' ) );
@@ -47,6 +50,10 @@ final class Simple_User_Adding {
 
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
+	}
+
+	public static function load_plugin_textdomain() {
+		load_plugin_textdomain( 'simple-user-adding', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	public static function add_plugin_admin_menu() {
@@ -86,12 +93,10 @@ final class Simple_User_Adding {
 		$help = '<p>' . __( 'To add a new user to your site, fill in the form on this screen and click the Add New User button at the bottom.', 'simple-user-adding' ) . '</p>';
 
 		if ( is_multisite() ) {
-			$help .= '<p>' . __( 'Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users.', 'simple-user-adding' ) . '</p>' .
-			         '<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their password.', 'simple-user-adding' ) . '</p>';
-		} else {
-			$help .= '<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their auto-generated password.', 'simple-user-adding' ) . '</p>';
+			$help .= '<p>' . __( 'Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users.', 'simple-user-adding' ) . '</p>';
 		}
 
+		$help .= '<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their automatically generated password.', 'simple-user-adding' ) . '</p>';
 		$help .= '<p>' . __( 'Remember to click the Add New User button at the bottom of this screen when you are finished.', 'simple-user-adding' ) . '</p>';
 
 		$screen->add_help_tab( array(
