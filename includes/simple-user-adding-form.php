@@ -106,7 +106,7 @@
 			<tr class="additional hidden">
 				<th scope="row"><label for="sua_url"><?php _e( 'Website' ) ?></label></th>
 				<td>
-					<input name="url" type="sua_url" id="sua_url" class="code" />
+					<input name="url" type="sua_url" id="sua_url" class="regular-text code" />
 				</td>
 			</tr>
 			<?php foreach ( wp_get_user_contact_methods() as $name => $desc ) : ?>
