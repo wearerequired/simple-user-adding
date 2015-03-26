@@ -8,7 +8,7 @@ This plugin makes adding users to your WordPress site easier than ever before.
 
 ## Contributions
 
-If you would like to contribute to this plugin, report an isse or anything like that, please note that we develop this plugin on [GitHub](https://github.com/wearerequired/WP-Widget-Disable).
+If you would like to contribute to this plugin, report an issue or anything like that, please note that we develop this plugin on [GitHub](https://github.com/wearerequired/WP-Widget-Disable).
 
 Developed by [required+](http://required.ch/ "Team of experienced web professionals from Switzerland & Germany")
 
