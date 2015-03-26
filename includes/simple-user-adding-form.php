@@ -75,7 +75,7 @@
 			<?php foreach ( wp_get_user_contact_methods() as $name => $desc ) : ?>
 				<tr class="additional hidden">
 					<th>
-						<label for="sua_<?php echo esc_attr( $name ); ?>"><?php echo apply_filters( "user_{$name}_label", $desc ); ?></label>
+						<label for="sua_<?php echo esc_attr( $name ); ?>"><?php echo esc_html( apply_filters( "user_{$name}_label", $desc ) ); ?></label>
 					</th>
 					<td>
 						<input type="text" name="sua_<?php echo esc_attr( $name ); ?>" id="sua_<?php echo esc_attr( $name ); ?>" class="regular-text" />
