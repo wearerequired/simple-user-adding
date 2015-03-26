@@ -50,5 +50,11 @@
       additionalFieldsShown = !additionalFieldsShown;
       $('#sua_createuser .additional').toggleClass('hidden');
     });
+
+    // JS form validation
+    $('#sua_createuser').submit(function (e) {
+      if (!validateForm(this))
+        e.preventDefault();
+    })
   });
 }(jQuery));

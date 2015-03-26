@@ -50,7 +50,7 @@
 
 	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" name="sua_createuser" id="sua_createuser" novalidate>
 		<table class="form-table">
-			<tr>
+			<tr class="form-required">
 				<th scope="row">
 					<label for="sua_username"><?php _e( 'Username', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
@@ -60,7 +60,7 @@
 					<input type="text" id="sua_username" name="sua_username" class="regular-text" />
 				</td>
 			</tr>
-			<tr>
+			<tr class="form-required">
 				<th scope="row">
 					<label for="sua_email"><?php _e( 'E-mail', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
