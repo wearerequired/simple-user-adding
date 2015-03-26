@@ -91,11 +91,15 @@ final class Simple_User_Adding {
 		 */
 		check_admin_referer( 'simple-user-adding', 'simple_user_adding_nonce' );
 
+		if ( ! current_user_can( 'create_users' ) ) {
+			wp_die( __( 'Cheatin&#8217; uh?', 'simple-user-adding' ), 403 );
+		}
+
 		// todo: process form
 
 		// Check required fields
-		if ( ! isset( $_POST['sua_username'] ) || empty( $_POST['sua_username'] )
-		     || ! isset( $_POST['sua_email'] ) || empty( $_POST['sua_email'] )
+		if ( ! isset( $_POST['user_login'] ) || empty( $_POST['user_login'] )
+		     || ! isset( $_POST['email'] ) || empty( $_POST['email'] )
 		) {
 			wp_redirect( add_query_arg(
 				array( 'message' => 'required_fields_missing' ),
@@ -105,7 +109,7 @@ final class Simple_User_Adding {
 		}
 
 		// Check if the email address at least contains an @ sign
-		$user_email = wp_unslash( $_POST['sua_email'] );
+		$user_email = wp_unslash( $_POST['email'] );
 		if ( false === strpos( $user_email, '@' ) ) {
 			wp_redirect( add_query_arg(
 				array( 'message' => 'enter_email' ),
@@ -124,7 +128,7 @@ final class Simple_User_Adding {
 		}
 
 		// Check if a user with this login already exists
-		if ( get_user_by( 'login', wp_unslash( $_POST['sua_username'] ) ) ) {
+		if ( get_user_by( 'login', wp_unslash( $_POST['user_login'] ) ) ) {
 			wp_redirect( add_query_arg(
 				array( 'message' => 'user_name_exists' ),
 				admin_url( 'users.php?page=simple-user-adding' )
@@ -132,9 +136,21 @@ final class Simple_User_Adding {
 			die();
 		}
 
-		// todo: create & activate user
+		// Set passwords for use in edit_user()
+		$_POST['pass2'] = $_POST['pass1'] = wp_generate_password( 24 );
 
-		// todo: send email to user
+		// Set the flag to send a notification mail to the user
+		$_POST['send_password'] = true;
+
+		// This creates (or updates) a user
+		$user_id = edit_user();
+		if ( is_wp_error( $user_id ) ) {
+			wp_redirect( add_query_arg(
+				array( 'message' => 'failure' ),
+				admin_url( 'users.php?page=simple-user-adding' )
+			) );
+			die();
+		}
 
 		wp_redirect( add_query_arg(
 			array( 'message' => 'success' ),

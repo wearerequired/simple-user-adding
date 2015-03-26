@@ -52,6 +52,12 @@
 					'text'  => __( 'User successfully added.', 'simple-user-adding' )
 				);
 				break;
+			case 'failure':
+				$message = array(
+					'class' => 'updated',
+					'text'  => __( 'There was an error adding the user. Please try again.', 'simple-user-adding' )
+				);
+				break;
 		}
 	}
 
@@ -64,22 +70,22 @@
 		<table class="form-table">
 			<tr class="form-required">
 				<th scope="row">
-					<label for="sua_username"><?php _e( 'Username', 'simple-user-adding' ); ?>
+					<label for="user_login"><?php _e( 'Username', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
 					</label>
 				</th>
 				<td>
-					<input type="text" id="sua_username" name="sua_username" class="regular-text" />
+					<input type="text" id="user_login" name="user_login" class="regular-text" />
 				</td>
 			</tr>
 			<tr class="form-required">
 				<th scope="row">
-					<label for="sua_email"><?php _e( 'E-mail', 'simple-user-adding' ); ?>
+					<label for="email"><?php _e( 'E-mail', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
 					</label>
 				</th>
 				<td>
-					<input type="email" id="sua_email" name="sua_email" class="regular-text" />
+					<input type="email" id="email" name="email" class="regular-text" />
 
 					<div id="sua_email_note" class="hidden">
 						<p>
@@ -91,43 +97,43 @@
 			</tr>
 			<tr>
 				<th scope="row">
-					<label for="sua_role"><?php _e( 'Role', 'simple-user-adding' ); ?></label>
+					<label for="role"><?php _e( 'Role', 'simple-user-adding' ); ?></label>
 				</th>
 				<td>
-					<select name="role" id="sua_role">
+					<select name="role" id="role">
 						<?php wp_dropdown_roles( get_option( 'default_role' ) ); ?>
 					</select>
 				</td>
 			</tr>
 			<tr class="additional hidden">
 				<th scope="row">
-					<label for="sua_first_name"><?php _e( 'First Name', 'simple-user-adding' ); ?></label>
+					<label for="first_name"><?php _e( 'First Name', 'simple-user-adding' ); ?></label>
 				</th>
 				<td>
-					<input type="text" id="sua_first_name" name="sua_first_name" class="regular-text" />
+					<input type="text" id="first_name" name="first_name" class="regular-text" />
 				</td>
 			</tr>
 			<tr class="additional hidden">
 				<th scope="row">
-					<label for="sua_last_name"><?php _e( 'Last Name', 'simple-user-adding' ); ?></label>
+					<label for="last_name"><?php _e( 'Last Name', 'simple-user-adding' ); ?></label>
 				</th>
 				<td>
-					<input type="text" id="sua_last_name" name="sua_last_name" class="regular-text" />
+					<input type="text" id="last_name" name="last_name" class="regular-text" />
 				</td>
 			</tr>
 			<tr class="additional hidden">
-				<th scope="row"><label for="sua_url"><?php _e( 'Website' ) ?></label></th>
+				<th scope="row"><label for="url"><?php _e( 'Website' ) ?></label></th>
 				<td>
-					<input name="url" type="sua_url" id="sua_url" class="regular-text code" />
+					<input name="url" type="url" id="url" class="regular-text code" />
 				</td>
 			</tr>
 			<?php foreach ( wp_get_user_contact_methods() as $name => $desc ) : ?>
 				<tr class="additional hidden">
 					<th>
-						<label for="sua_<?php echo esc_attr( $name ); ?>"><?php echo apply_filters( "user_{$name}_label", $desc ); ?></label>
+						<label for="<?php echo esc_attr( $name ); ?>"><?php echo apply_filters( "user_{$name}_label", $desc ); ?></label>
 					</th>
 					<td>
-						<input type="text" name="sua_<?php echo esc_attr( $name ); ?>" id="sua_<?php echo esc_attr( $name ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="regular-text" />
 					</td>
 				</tr>
 			<?php endforeach ?>

@@ -7,12 +7,12 @@
 
     var firstName,
         lastName,
-        firstNameField = $('#sua_first_name'),
-        lastNameField = $('#sua_last_name'),
+        firstNameField = $('#first_name'),
+        lastNameField = $('#last_name'),
         additionalFieldsShown = false;
 
     // Detect email input change
-    $("#sua_email").on('change keyup paste', function () {
+    $("#email").on('change keyup paste', function () {
       var val = $(this).val(),
           parts = val.substr(0, val.indexOf('@')).split('.');
 
