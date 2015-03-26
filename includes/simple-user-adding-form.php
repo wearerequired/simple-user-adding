@@ -66,7 +66,14 @@
 	}
 	?>
 
-	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" name="sua_createuser" id="sua_createuser" novalidate>
+	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" name="sua_createuser" id="sua_createuser" novalidate <?php
+	/**
+	 * Fires inside the adduser form tag.
+	 *
+	 * @since 1.0.0
+	 */
+	do_action( 'user_new_form_tag' );
+	?>>
 		<table class="form-table">
 			<tr class="form-required">
 				<th scope="row">
@@ -145,6 +152,21 @@
 				</td>
 			</tr>
 		</table>
+
+		<?php
+		/**
+		 * Fires at the end of the new user form.
+		 *
+		 * Passes a contextual string to make both types of new user forms
+		 * uniquely targetable. Contexts are 'add-existing-user' (Multisite),
+		 * and 'add-new-user' (single site and network admin).
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $type A contextual string specifying which type of new user form the hook follows.
+		 */
+		do_action( 'user_new_form', 'add-existing-user' );
+		?>
 
 		<input type="hidden" name="action" value="simple_user_adding">
 		<?php wp_nonce_field( 'simple-user-adding', 'simple_user_adding_nonce' ); ?>
