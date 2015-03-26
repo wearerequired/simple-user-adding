@@ -114,18 +114,11 @@
 			</tr>
 			<tr class="additional hidden">
 				<th scope="row">
-					<label for="first_name"><?php _e( 'First Name', 'simple-user-adding' ); ?></label>
+					<label for="first_name"><?php _e( 'Name', 'simple-user-adding' ); ?></label>
 				</th>
 				<td>
-					<input type="text" id="first_name" name="first_name" class="regular-text" />
-				</td>
-			</tr>
-			<tr class="additional hidden">
-				<th scope="row">
-					<label for="last_name"><?php _e( 'Last Name', 'simple-user-adding' ); ?></label>
-				</th>
-				<td>
-					<input type="text" id="last_name" name="last_name" class="regular-text" />
+					<input type="text" id="first_name" name="first_name" class="regular-text" placeholder="<?php esc_attr_e( 'First Name', 'simple-user-adding' ); ?>" />
+					<input type="text" id="last_name" name="last_name" class="regular-text" placeholder="<?php esc_attr_e( 'Last Name', 'simple-user-adding' ); ?>" />
 				</td>
 			</tr>
 			<tr class="additional hidden">
