@@ -39,6 +39,9 @@ final class Simple_User_Adding {
 		add_action( 'admin_menu', array( __CLASS__, 'add_plugin_admin_menu' ) );
 		add_filter( 'admin_footer_text', array( __CLASS__, 'add_admin_footer' ) );
 
+		// Add help tab
+		add_action( 'load-users_page_simple-user-adding', array( __CLASS__, 'add_admin_help_tab' ) );
+
 		// Handle form submissions
 		add_action( 'admin_post_simple_user_adding', array( __CLASS__, 'create_user' ) );
 
@@ -72,6 +75,49 @@ final class Simple_User_Adding {
 		$text .= ' <a href="' . admin_url( 'user-new.php' ) . '">' . __( 'Looking for the original Add User form?', 'wp-widget-disable' ) . '</a>';
 
 		return $text;
+	}
+
+	public static function add_admin_help_tab() {
+		$screen = get_current_screen();
+		if ( 'users_page_simple-user-adding' !== $screen->id ) {
+			return;
+		}
+
+		$help = '<p>' . __( 'To add a new user to your site, fill in the form on this screen and click the Add New User button at the bottom.', 'simple-user-adding' ) . '</p>';
+
+		if ( is_multisite() ) {
+			$help .= '<p>' . __( 'Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users.', 'simple-user-adding' ) . '</p>' .
+			         '<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their password.', 'simple-user-adding' ) . '</p>';
+		} else {
+			$help .= '<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their auto-generated password.', 'simple-user-adding' ) . '</p>';
+		}
+
+		$help .= '<p>' . __( 'Remember to click the Add New User button at the bottom of this screen when you are finished.', 'simple-user-adding' ) . '</p>';
+
+		$screen->add_help_tab( array(
+			'id'      => 'overview',
+			'title'   => __( 'Overview', 'simple-user-adding' ),
+			'content' => $help,
+		) );
+
+		$screen->add_help_tab( array(
+			'id'      => 'user-roles',
+			'title'   => __( 'User Roles', 'simple-user-adding' ),
+			'content' => '<p>' . __( 'Here is a basic overview of the different user roles and the permissions associated with each one:', 'simple-user-adding' ) . '</p>' .
+			             '<ul>' .
+			             '<li>' . __( 'Subscribers can read comments/comment/receive newsletters, etc. but cannot create regular site content.', 'simple-user-adding' ) . '</li>' .
+			             '<li>' . __( 'Contributors can write and manage their posts but not publish posts or upload media files.', 'simple-user-adding' ) . '</li>' .
+			             '<li>' . __( 'Authors can publish and manage their own posts, and are able to upload files.', 'simple-user-adding' ) . '</li>' .
+			             '<li>' . __( 'Editors can publish posts, manage posts as well as manage other people&#8217;s posts, etc.', 'simple-user-adding' ) . '</li>' .
+			             '<li>' . __( 'Administrators have access to all the administration features.', 'simple-user-adding' ) . '</li>' .
+			             '</ul>'
+		) );
+
+		$screen->set_help_sidebar(
+			'<p><strong>' . __( 'For more information:', 'simple-user-adding' ) . '</strong></p>' .
+			'<p>' . __( '<a href="http://codex.wordpress.org/Users_Add_New_Screen" target="_blank">Documentation on Adding New Users</a>', 'simple-user-adding' ) . '</p>' .
+			'<p>' . __( '<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>', 'simple-user-adding' ) . '</p>'
+		);
 	}
 
 	public static function admin_enqueue_scripts() {
