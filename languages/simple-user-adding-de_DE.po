@@ -5,128 +5,136 @@ msgstr ""
 "Project-Id-Version: Simple User Adding 1.0.0\n"
 "Report-Msgid-Bugs-To: http://required.ch\n"
 "POT-Creation-Date: 2015-03-26 14:24:24+00:00\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
-"Last-Translator: required+\n"
+"PO-Revision-Date: 2015-03-26 15:24+0100\n"
+"Last-Translator: Pascal Birchler <pascal@required.ch>\n"
 "Language-Team: required+\n"
-"X-Generator: grunt-wp-i18n 0.5.0\n"
-"X-Poedit-KeywordsList: "
-"__;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;_nx_noop:1,2,3c;esc_"
-"attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;esc_html_x:1,2c;\n"
-"Language: en\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2;_nx:1,2,4c;_n_noop:1,2;"
+"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
+"esc_html_x:1,2c\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-Country: United States\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ../\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
 
 #: includes/simple-user-adding-form.php:19
 msgid "Create a brand new user and add them to this site."
-msgstr ""
+msgstr "Lege einen nagelneuen Benutzer an und füge ihn dieser Website zu."
 
 #: includes/simple-user-adding-form.php:28
 msgid "Required fields missing."
-msgstr ""
+msgstr "Pflichtfelder fehlen."
 
 #: includes/simple-user-adding-form.php:34
 msgid "Please enter a valid email address."
-msgstr ""
+msgstr "Bitte gib eine gültige E-Mail-Adresse an."
 
 #: includes/simple-user-adding-form.php:40
 msgid "A user with this email address already exists."
-msgstr ""
+msgstr "Ein Benutzer mit dieser E-Mail-Adresse existiert bereits."
 
 #: includes/simple-user-adding-form.php:46
 msgid "A user with this username already exists."
-msgstr ""
+msgstr "Ein Benutzer mit diesem Benutzernamen existiert bereits."
 
 #: includes/simple-user-adding-form.php:52
 msgid "User successfully added."
-msgstr ""
+msgstr "Benutzer erfolgreich hinzugefügt"
 
 #: includes/simple-user-adding-form.php:58
 msgid "There was an error adding the user. Please try again."
 msgstr ""
+"Beim Hinzufügen des Benutzers ist ein Fehler aufgetreten. Bitte versuch es "
+"erneut."
 
 #: includes/simple-user-adding-form.php:73
 msgid "Username"
-msgstr ""
+msgstr "Benutzername"
 
 #: includes/simple-user-adding-form.php:74
 #: includes/simple-user-adding-form.php:84
 msgid "(required)"
-msgstr ""
+msgstr "(erforderlich)"
 
 #: includes/simple-user-adding-form.php:83
 msgid "E-mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: includes/simple-user-adding-form.php:92
 msgid "Is this %s?"
-msgstr ""
+msgstr "Ist das %s?"
 
 #: includes/simple-user-adding-form.php:93
 msgid "Insert name"
-msgstr ""
+msgstr "Name einfügen"
 
 #: includes/simple-user-adding-form.php:100
 msgid "Role"
-msgstr ""
+msgstr "Rolle"
 
 #: includes/simple-user-adding-form.php:110
 msgid "First Name"
-msgstr ""
+msgstr "Vorname"
 
 #: includes/simple-user-adding-form.php:118
 msgid "Last Name"
-msgstr ""
+msgstr "Nachname"
 
 #: includes/simple-user-adding-form.php:125
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 #: includes/simple-user-adding-form.php:144
 msgid "Show More"
-msgstr ""
+msgstr "Mehr anzeigen"
 
 #: includes/simple-user-adding-form.php:144
 msgid "Show Less"
-msgstr ""
+msgstr "Weniger anzeigen"
 
 #: includes/simple-user-adding-form.php:151 simple-user-adding.php:61
 msgid "Add New User"
-msgstr ""
+msgstr "Neuen Benutzer hinzufügen"
 
 #: simple-user-adding.php:62
 msgid "Add New"
-msgstr ""
+msgstr "Neu hinzufügen"
 
 #: simple-user-adding.php:81
 msgid "%s is brought to you by %s. We &hearts; WordPress."
-msgstr ""
+msgstr "%s wurde entwickelt von %s. Wir &hearts; WordPress."
 
 #: simple-user-adding.php:82
 msgid "Looking for the original Add User form?"
-msgstr ""
+msgstr "Suchst du das Original-Formular zum Hinzufügen?"
 
 #: simple-user-adding.php:93
 msgid ""
 "To add a new user to your site, fill in the form on this screen and click "
 "the Add New User button at the bottom."
 msgstr ""
+"Um einen neuen Benutzer zu deiner Seite hinzuzufügen, fülle das Formular auf "
+"dieser Seite aus, und klicke unten auf Neuen Benutzer hinzufügen."
 
 #: simple-user-adding.php:96
 msgid ""
 "Because this is a multisite installation, you may add accounts that already "
-"exist on the Network by specifying a username or email, and defining a "
-"role. For more options, you have to be a Network Administrator and use the "
-"hover link under an existing user&#8217;s name to Edit the user profile "
-"under Network Admin > All Users."
+"exist on the Network by specifying a username or email, and defining a role. "
+"For more options, you have to be a Network Administrator and use the hover "
+"link under an existing user&#8217;s name to Edit the user profile under "
+"Network Admin > All Users."
 msgstr ""
+"Da dies eine Netzwerk-Installation (Multisite) ist, kannst du existierende "
+"Benutzer aus anderen Seiten dieses Netzwerks einfach hinzufügen, in dem du "
+"einen Benutzernamen oder eine E-Mail-Adresse angibst, sowie eine "
+"Benutzerrolle festlegst. Für weitere Optionen musst du seitenübergreifender "
+"Administrator sein. Du kannst dann über Netzwerkverwaltung &gt; Alle "
+"Benutzer das Profil des Benutzers verändern."
 
 #: simple-user-adding.php:99
 msgid ""
@@ -134,93 +142,113 @@ msgid ""
 "as a user for your site. This email will also contain their automatically "
 "generated password."
 msgstr ""
+"Neue Benutzer erhalten eine E-Mail, um sie wissen zu lassen das sie als "
+"Nutzer deiner Seite hinzugefügt wurden. Diese E-Mail wird auch ihr "
+"automatisch generiertes Passwort beinhalten."
 
 #: simple-user-adding.php:100
 msgid ""
 "Remember to click the Add New User button at the bottom of this screen when "
 "you are finished."
 msgstr ""
+"Vergiss nicht, unten auf dieser Seite auf Neuen Benutzer hinzufügen zu "
+"klicken, wenn Du fertig bist."
 
 #: simple-user-adding.php:104
 msgid "Overview"
-msgstr ""
+msgstr "Übersicht"
 
 #: simple-user-adding.php:110
 msgid "User Roles"
-msgstr ""
+msgstr "Benutzerrollen"
 
 #: simple-user-adding.php:111
 msgid ""
 "Here is a basic overview of the different user roles and the permissions "
 "associated with each one:"
 msgstr ""
+"Hier ist ein grober Überblick über die verschiedenen Benutzerrollen und die "
+"jeweils damit verknüpften Berechtigungen:"
 
 #: simple-user-adding.php:113
 msgid ""
 "Subscribers can read comments/comment/receive newsletters, etc. but cannot "
 "create regular site content."
 msgstr ""
+"Abonennten können nur Kommentare lesen und abgeben, aber keine eigenen "
+"Inhalte erstellen."
 
 #: simple-user-adding.php:114
 msgid ""
 "Contributors can write and manage their posts but not publish posts or "
 "upload media files."
 msgstr ""
+"Mitarbeiter können eigene Beiträge schreiben und bearbeiten, sie jedoch "
+"nicht veröffentlichen. Auch dürfen sie keine Dateien hochladen."
 
 #: simple-user-adding.php:115
 msgid ""
-"Authors can publish and manage their own posts, and are able to upload "
-"files."
+"Authors can publish and manage their own posts, and are able to upload files."
 msgstr ""
+"Autoren können ihre eigenen Beiträge veröffentlichen und verwalten, sowie "
+"Dateien hochladen."
 
 #: simple-user-adding.php:116
 msgid ""
-"Editors can publish posts, manage posts as well as manage other "
-"people&#8217;s posts, etc."
+"Editors can publish posts, manage posts as well as manage other people&#8217;"
+"s posts, etc."
 msgstr ""
+"Redakteure können Beiträge und Seiten anlegen und veröffentlichen, sowie die "
+"Beiträge, Seiten (etc.) von anderen Benutzern verwalten (ändern, löschen, "
+"veröffentlichen)."
 
 #: simple-user-adding.php:117
 msgid "Administrators have access to all the administration features."
-msgstr ""
+msgstr "Administratoren haben die komplette Macht und sehen alle Optionen."
 
 #: simple-user-adding.php:122
 msgid "For more information:"
-msgstr ""
+msgstr "Für mehr Information:"
 
 #: simple-user-adding.php:123
 msgid ""
-"<a href=\"http://codex.wordpress.org/Users_Add_New_Screen\" "
-"target=\"_blank\">Documentation on Adding New Users</a>"
+"<a href=\"http://codex.wordpress.org/Users_Add_New_Screen\" target=\"_blank"
+"\">Documentation on Adding New Users</a>"
 msgstr ""
+"<a href=\"http://codex.wordpress.org/Users_Add_New_Screen\" target=\"_blank"
+"\">Documentation on Adding New Users (engl.)</a>"
 
 #: simple-user-adding.php:124
 msgid ""
-"<a href=\"https://wordpress.org/support/\" target=\"_blank\">Support "
-"Forums</a>"
+"<a href=\"https://wordpress.org/support/\" target=\"_blank\">Support Forums</"
+"a>"
 msgstr ""
+"<a href=\"https://de.wordpress.org/hilfe/\" target=\"_blank\">Support</a>"
 
 #: simple-user-adding.php:146
 msgid "Cheatin&#8217; uh?"
-msgstr ""
+msgstr "Schummeln, was?"
 
 #. Plugin Name of the plugin/theme
 msgid "Simple User Adding"
-msgstr ""
+msgstr "Simple User Adding"
 
 #. Plugin URI of the plugin/theme
 msgid "https://github.com/wearerequired/simple-user-adding"
-msgstr ""
+msgstr "https://github.com/wearerequired/simple-user-adding"
 
 #. Description of the plugin/theme
 msgid ""
 "This plugin makes adding users to your WordPress site easier than ever "
 "before."
 msgstr ""
+"Dieses Plugin macht das Hinzufügen neuer Benutzer zu deiner WordPress-Site "
+"einfacher als jemals zuvor."
 
 #. Author of the plugin/theme
 msgid "required+"
-msgstr ""
+msgstr "required+"
 
 #. Author URI of the plugin/theme
 msgid "http://required.ch"
-msgstr ""
+msgstr "http://required.ch"
