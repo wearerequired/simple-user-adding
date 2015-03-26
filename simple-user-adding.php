@@ -159,9 +159,9 @@ final class Simple_User_Adding {
 			die();
 		}
 
-		// Check if the email address at least contains an @ sign
+		// Check if the email address is valid
 		$user_email = wp_unslash( $_POST['email'] );
-		if ( false === strpos( $user_email, '@' ) ) {
+		if ( ! is_email( $user_email ) ) {
 			wp_redirect( add_query_arg(
 				array( 'message' => 'enter_email' ),
 				admin_url( 'users.php?page=simple-user-adding' )
