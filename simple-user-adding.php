@@ -98,7 +98,35 @@ final class Simple_User_Adding {
 		     || ! isset( $_POST['sua_email'] ) || empty( $_POST['sua_email'] )
 		) {
 			wp_redirect( add_query_arg(
-				array( 'message' => '1' ),
+				array( 'message' => 'required_fields_missing' ),
+				admin_url( 'users.php?page=simple-user-adding' )
+			) );
+			die();
+		}
+
+		// Check if the email address at least contains an @ sign
+		$user_email = wp_unslash( $_POST['sua_email'] );
+		if ( false === strpos( $user_email, '@' ) ) {
+			wp_redirect( add_query_arg(
+				array( 'message' => 'enter_email' ),
+				admin_url( 'users.php?page=simple-user-adding' )
+			) );
+			die();
+		}
+
+		// Check if a user with this email address already exists
+		if ( get_user_by( 'email', $user_email ) ) {
+			wp_redirect( add_query_arg(
+				array( 'message' => 'user_email_exists' ),
+				admin_url( 'users.php?page=simple-user-adding' )
+			) );
+			die();
+		}
+
+		// Check if a user with this login already exists
+		if ( get_user_by( 'login', wp_unslash( $_POST['sua_username'] ) ) ) {
+			wp_redirect( add_query_arg(
+				array( 'message' => 'user_name_exists' ),
 				admin_url( 'users.php?page=simple-user-adding' )
 			) );
 			die();
@@ -109,7 +137,7 @@ final class Simple_User_Adding {
 		// todo: send email to user
 
 		wp_redirect( add_query_arg(
-			array( 'message' => '2' ),
+			array( 'message' => 'success' ),
 			admin_url( 'users.php?page=simple-user-adding' )
 		) );
 		die();

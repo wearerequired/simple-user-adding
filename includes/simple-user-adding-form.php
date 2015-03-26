@@ -22,13 +22,31 @@
 	$message = array();
 	if ( isset( $_GET['message'] ) ) {
 		switch ( $_GET['message'] ) {
-			case 1:
+			case 'required_fields_missing':
 				$message = array(
 					'class' => 'error',
-					'text'  => __( 'Required fields missing', 'simple-user-adding' )
+					'text'  => __( 'Required fields missing.', 'simple-user-adding' )
 				);
 				break;
-			case 2:
+			case 'enter_email':
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'Please enter a valid email address.', 'simple-user-adding' )
+				);
+				break;
+			case 'user_email_exists':
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'A user with this email address already exists.', 'simple-user-adding' )
+				);
+				break;
+			case 'user_name_exists':
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'A user with this username already exists.', 'simple-user-adding' )
+				);
+				break;
+			case 'success':
 				$message = array(
 					'class' => 'updated',
 					'text'  => __( 'User successfully added.', 'simple-user-adding' )
