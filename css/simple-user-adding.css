@@ -1,0 +1,22 @@
+#email {
+	float: left;
+}
+
+#sua_email_note {
+	float: left;
+	margin-left: 10px;
+}
+
+#first_name,
+#last_name {
+	width: 12em;
+}
+
+#first_name {
+	margin-right: .5em;
+}
+
+#notification_msg {
+	width: 25em;
+	height: 120px;
+}

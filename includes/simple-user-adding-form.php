@@ -18,70 +18,139 @@
 
 	<p><?php _e( 'Create a brand new user and add them to this site.', 'simple-user-adding' ); ?></p>
 
-	<form action="" method="post" name="sua_createuser" id="sua_createuser" novalidate>
+	<?php
+	$message = array();
+	if ( isset( $_GET['message'] ) ) {
+		switch ( $_GET['message'] ) {
+			case 'required_fields_missing':
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'Required fields missing.', 'simple-user-adding' )
+				);
+				break;
+			case 'enter_email':
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'Please enter a valid email address.', 'simple-user-adding' )
+				);
+				break;
+			case 'user_email_exists':
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'A user with this email address already exists.', 'simple-user-adding' )
+				);
+				break;
+			case 'user_name_exists':
+				$message = array(
+					'class' => 'error',
+					'text'  => __( 'A user with this username already exists.', 'simple-user-adding' )
+				);
+				break;
+			case 'success':
+				$message = array(
+					'class' => 'updated',
+					'text'  => __( 'User successfully added.', 'simple-user-adding' )
+				);
+				break;
+			case 'failure':
+				$message = array(
+					'class' => 'updated',
+					'text'  => __( 'There was an error adding the user. Please try again.', 'simple-user-adding' )
+				);
+				break;
+		}
+	}
+
+	if ( ! empty( $message ) ) {
+		echo '<div id="message" class="' . esc_attr( $message['class'] ) . '"><p>' . esc_html( $message['text'] ) . '</p></div>';
+	}
+	?>
+
+	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post" name="sua_createuser" id="sua_createuser" novalidate <?php
+	/**
+	 * Fires inside the adduser form tag.
+	 *
+	 * @since 1.0.0
+	 */
+	do_action( 'user_new_form_tag' );
+	?>>
 		<table class="form-table">
-			<tr>
+			<tr class="form-required">
 				<th scope="row">
-					<label for="sua_username"><?php _e( 'Username', 'simple-user-adding' ); ?>
+					<label for="user_login"><?php _e( 'Username', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
 					</label>
 				</th>
 				<td>
-					<input type="text" id="sua_username" name="sua_username" class="regular-text" />
+					<input type="text" id="user_login" name="user_login" class="regular-text" />
 				</td>
 			</tr>
-			<tr>
+			<tr class="form-required">
 				<th scope="row">
-					<label for="sua_email"><?php _e( 'E-mail', 'simple-user-adding' ); ?>
+					<label for="email"><?php _e( 'E-mail', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
 					</label>
 				</th>
 				<td>
-					<input type="email" id="sua_email" name="sua_email" class="regular-text" />
+					<input type="email" id="email" name="email" class="regular-text" />
+
+					<div id="sua_email_note" class="hidden">
+						<p>
+							<?php printf( __( 'Is this %s?', 'simple-user-adding' ), '<span id="sua_email_name"></span>' ); ?>
+							<a href="#" id="sua_email_note_insert"><?php _e( 'Insert name', 'simple-user-adding' ); ?></a>
+						</p>
+					</div>
 				</td>
 			</tr>
 			<tr>
 				<th scope="row">
-					<label for="sua_role"><?php _e( 'Role', 'simple-user-adding' ); ?></label>
+					<label for="role"><?php _e( 'Role', 'simple-user-adding' ); ?></label>
 				</th>
 				<td>
-					<select name="role" id="sua_role">
+					<select name="role" id="role">
 						<?php wp_dropdown_roles( get_option( 'default_role' ) ); ?>
 					</select>
 				</td>
 			</tr>
 			<tr class="additional hidden">
 				<th scope="row">
-					<label for="sua_first_name"><?php _e( 'First Name', 'simple-user-adding' ); ?></label>
+					<label for="first_name"><?php _e( 'Name', 'simple-user-adding' ); ?></label>
 				</th>
 				<td>
-					<input type="text" id="sua_first_name" name="sua_first_name" class="regular-text" />
+					<input type="text" id="first_name" name="first_name" class="regular-text" placeholder="<?php esc_attr_e( 'First Name', 'simple-user-adding' ); ?>" />
+					<input type="text" id="last_name" name="last_name" class="regular-text" placeholder="<?php esc_attr_e( 'Last Name', 'simple-user-adding' ); ?>" />
 				</td>
 			</tr>
 			<tr class="additional hidden">
-				<th scope="row">
-					<label for="sua_last_name"><?php _e( 'Last Name', 'simple-user-adding' ); ?></label>
-				</th>
+				<th scope="row"><label for="url"><?php _e( 'Website' ) ?></label></th>
 				<td>
-					<input type="text" id="sua_last_name" name="sua_last_name" class="regular-text" />
-				</td>
-			</tr>
-			<tr class="additional hidden">
-				<th scope="row"><label for="sua_url"><?php _e( 'Website' ) ?></label></th>
-				<td>
-					<input name="url" type="sua_url" id="sua_url" class="code" />
+					<input name="url" type="url" id="url" class="regular-text code" />
 				</td>
 			</tr>
 			<?php foreach ( wp_get_user_contact_methods() as $name => $desc ) : ?>
 				<tr class="additional hidden">
 					<th>
+<<<<<<< HEAD
 						<label for="sua_<?php echo esc_attr( $name ); ?>"><?php echo esc_html( apply_filters( "user_{$name}_label", $desc ) ); ?></label>
+=======
+						<label for="<?php echo esc_attr( $name ); ?>"><?php echo esc_html( apply_filters( "user_{$name}_label", $desc ) ); ?></label>
+>>>>>>> release/1.0.0
 					</th>
 					<td>
-						<input type="text" name="sua_<?php echo esc_attr( $name ); ?>" id="sua_<?php echo esc_attr( $name ); ?>" class="regular-text" />
+						<input type="text" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="regular-text" />
 					</td>
 				</tr>
 			<?php endforeach ?>
+			<?php if ( Simple_User_Adding::$can_modify_email ) : ?>
+				<tr class="additional hidden">
+					<th scope="row"><label for="notification_msg"><?php _e( 'Message' ) ?></label></th>
+					<td>
+						<textarea name="notification_msg" id="notification_msg" class="regular-text"></textarea>
+
+						<p class="description"><?php _e( 'This text is shown to the user in the confirmation email they receive.' ); ?></p>
+					</td>
+				</tr>
+			<?php endif; ?>
 			<tr>
 				<th scope="row">
 				</th>
@@ -91,6 +160,23 @@
 			</tr>
 		</table>
 
+		<?php
+		/**
+		 * Fires at the end of the new user form.
+		 *
+		 * Passes a contextual string to make both types of new user forms
+		 * uniquely targetable. Contexts are 'add-existing-user' (Multisite),
+		 * and 'add-new-user' (single site and network admin).
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param string $type A contextual string specifying which type of new user form the hook follows.
+		 */
+		do_action( 'user_new_form', 'add-existing-user' );
+		?>
+
+		<input type="hidden" name="action" value="simple_user_adding">
+		<?php wp_nonce_field( 'simple-user-adding', 'simple_user_adding_nonce' ); ?>
 		<?php submit_button( __( 'Add New User', 'simple-user-adding' ), 'primary', 'submit' ); ?>
 	</form>
 </div>
