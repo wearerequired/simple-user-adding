@@ -13,5 +13,10 @@
 }
 
 #first_name {
-	margin-right:.5em;
+	margin-right: .5em;
+}
+
+#notification_msg {
+	width: 25em;
+	height: 120px;
 }

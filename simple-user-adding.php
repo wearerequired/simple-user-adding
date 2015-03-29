@@ -29,7 +29,25 @@ defined( 'ABSPATH' ) or die;
  */
 final class Simple_User_Adding {
 
+	/**
+	 * Plugin version used for enqueueing scripts and styles.
+	 *
+	 * @var string
+	 */
 	const VERSION = '1.0.0';
+
+	/**
+	 * Can we overwrite the pluggable wp_new_user_notification() function?
+	 *
+	 * @var bool
+	 */
+	public static $can_modify_email = false;
+
+	/**
+	 * Custom notification messagebeing sent to the newly added user.
+	 * @var string
+	 */
+	public static $notification_message = '';
 
 	/**
 	 * Add all hooks on init
@@ -193,6 +211,13 @@ final class Simple_User_Adding {
 		// Set the flag to send a notification mail to the user
 		$_POST['send_password'] = true;
 
+		// Filter the user notification when there's a custom message
+		if ( self::$can_modify_email && isset( $_POST['notification_msg'] ) && ! empty( $_POST['notification_msg'] ) ) {
+			self::$notification_message = wp_kses( $_POST['notification_msg'], array() );
+
+			add_filter( 'sua_notificiation_message', array( __CLASS__, 'modify_notification_message' ) );
+		}
+
 		// This creates (or updates) a user
 		$user_id = edit_user();
 		if ( is_wp_error( $user_id ) ) {
@@ -210,6 +235,56 @@ final class Simple_User_Adding {
 		die();
 	}
 
+	public static function modify_notification_message( $message ) {
+		if ( ! empty( self::$notification_message ) ) {
+			$message = self::$notification_message . "\r\n\r\n" . $message;
+		}
+
+		return $message;
+	}
+
 }
 
 add_action( 'plugins_loaded', array( 'Simple_User_Adding', 'init' ) );
+
+if ( ! function_exists( 'wp_new_user_notification' ) ) :
+
+	Simple_User_Adding::$can_modify_email = true;
+
+	/**
+	 * Email login credentials to a newly-registered user.
+	 *
+	 * A new user registration notification is also sent to admin email.
+	 *
+	 * @since 2.0.0
+	 *
+	 * @param int    $user_id        User ID.
+	 * @param string $plaintext_pass Optional. The user's plaintext password. Default empty.
+	 */
+	function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {
+		$user = get_userdata( $user_id );
+
+		// The blogname option is escaped with esc_html on the way into the database in sanitize_option
+		// we want to reverse this for the plain text arena of emails.
+		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
+
+		$message = sprintf( __( 'New user registration on your site %s:' ), $blogname ) . "\r\n\r\n";
+		$message .= sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
+		$message .= sprintf( __( 'E-mail: %s' ), $user->user_email ) . "\r\n";
+
+		@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration' ), $blogname ), $message );
+
+		if ( empty( $plaintext_pass ) ) {
+			return;
+		}
+
+		$message = sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n";
+		$message .= sprintf( __( 'Password: %s' ), $plaintext_pass ) . "\r\n";
+		$message .= wp_login_url() . "\r\n";
+
+		$message = apply_filters( 'sua_notificiation_message', $message, $user );
+
+		wp_mail( $user->user_email, sprintf( __( '[%s] Your username and password' ), $blogname ), $message );
+
+	}
+endif;
