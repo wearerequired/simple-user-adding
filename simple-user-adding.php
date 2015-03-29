@@ -5,7 +5,7 @@
  * @package   Simple_User_Adding
  * @author    Pascal Birchler <pascal@required.ch>
  * @license   GPL-2.0+
- * @link      https://github.com/wearerequired/user-feedback/
+ * @link      https://github.com/wearerequired/simple-user-adding
  * @copyright 2015 required gmbh
  *
  * @wordpress-plugin
