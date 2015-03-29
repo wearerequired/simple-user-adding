@@ -6,3 +6,12 @@
 	float: left;
 	margin-left: 10px;
 }
+
+#first_name,
+#last_name {
+	width: 12em;
+}
+
+#first_name {
+	margin-right:.5em;
+}
