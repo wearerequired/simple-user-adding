@@ -139,7 +139,7 @@
 			<?php endforeach ?>
 			<?php if ( Simple_User_Adding::$can_modify_email ) : ?>
 				<tr class="additional hidden">
-					<th scope="row"><label for="notification_msg"><?php _e( 'Message Text' ) ?></label></th>
+					<th scope="row"><label for="notification_msg"><?php _e( 'Message' ) ?></label></th>
 					<td>
 						<textarea name="notification_msg" id="notification_msg" class="regular-text"></textarea>
 
