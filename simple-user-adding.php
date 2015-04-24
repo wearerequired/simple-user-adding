@@ -9,16 +9,17 @@
  * @copyright 2015 required gmbh
  *
  * @wordpress-plugin
- * Plugin Name: Simple User Adding
- * Plugin URI:  https://github.com/wearerequired/simple-user-adding
- * Description: This plugin makes adding users to your WordPress site easier than ever before.
- * Version:     1.0.0
- * Author:      required+
- * Author URI:  http://required.ch
- * Text Domain: simple-user-adding
- * License:     GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
- * Domain Path: /languages
+ * Plugin Name:       Simple User Adding
+ * Plugin URI:        https://github.com/wearerequired/simple-user-adding
+ * GitHub Plugin URI: https://github.com/wearerequired/simple-user-adding
+ * Description:       This plugin makes adding users to your WordPress site easier than ever before.
+ * Version:           1.0.0
+ * Author:            required+
+ * Author URI:        http://required.ch
+ * Text Domain:       simple-user-adding
+ * License:           GPL-2.0+
+ * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
+ * Domain Path:       /languages
  */
 
 // Don't call this file directly
