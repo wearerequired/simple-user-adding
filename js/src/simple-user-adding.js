@@ -1,6 +1,5 @@
-/*! Simple User Adding - v1.0.0
- * http://required.ch
- * Copyright (c) 2015; * Licensed GPLv2+ */
+/* global jQuery, validateForm */
+
 /**
  * Simple User Adding
  *

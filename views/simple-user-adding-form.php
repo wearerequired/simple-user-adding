@@ -122,7 +122,7 @@
 				</td>
 			</tr>
 			<tr class="additional hidden">
-				<th scope="row"><label for="url"><?php _e( 'Website' ) ?></label></th>
+				<th scope="row"><label for="url"><?php _e( 'Website', 'simple-user-adding' ) ?></label></th>
 				<td>
 					<input name="url" type="url" id="url" class="regular-text code" />
 				</td>
@@ -130,20 +130,20 @@
 			<?php foreach ( wp_get_user_contact_methods() as $name => $desc ) : ?>
 				<tr class="additional hidden">
 					<th>
-						<label for="<?php echo esc_attr( $name ); ?>"><?php echo esc_html( apply_filters( "user_{$name}_label", $desc ) ); ?></label>
+						<label for="<?php echo esc_attr( $name ); ?>"><?php echo esc_html( apply_filters( 'user_{$name}_label', $desc ) ); ?></label>
 					</th>
 					<td>
 						<input type="text" name="<?php echo esc_attr( $name ); ?>" id="<?php echo esc_attr( $name ); ?>" class="regular-text" />
 					</td>
 				</tr>
 			<?php endforeach ?>
-			<?php if ( Simple_User_Adding::$can_modify_email ) : ?>
+			<?php if ( Simple_User_Adding_Plugin::$can_modify_email ) : ?>
 				<tr class="additional hidden">
-					<th scope="row"><label for="notification_msg"><?php _e( 'Message' ) ?></label></th>
+					<th scope="row"><label for="notification_msg"><?php _e( 'Message', 'simple-user-adding' ) ?></label></th>
 					<td>
 						<textarea name="notification_msg" id="notification_msg" class="regular-text"></textarea>
 
-						<p class="description"><?php _e( 'This text is shown to the user in the confirmation email they receive.' ); ?></p>
+						<p class="description"><?php _e( 'This text is shown to the user in the confirmation email they receive.', 'simple-user-adding' ); ?></p>
 					</td>
 				</tr>
 			<?php endif; ?>
