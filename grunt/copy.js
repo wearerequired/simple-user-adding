@@ -11,6 +11,7 @@ module.exports = {
 			'!js/src/**',
 			'!img/src/**',
 			'!Gruntfile.*',
+			'!grunt/**',
 			'!package.json',
 			'!.gitignore',
 			'!.gitmodules',
