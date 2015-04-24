@@ -36,7 +36,7 @@ include( dirname( __FILE__ ) . '/lib/requirements-check.php' );
 $simple_user_adding_requirements_check = new Simple_User_Adding_Requirements_Check( array(
 	'title' => 'Simple User Adding',
 	'php'   => '5.3',
-	'wp'    => '4.0',
+	'wp'    => '3.1',
 	'file'  => __FILE__,
 ));
 
