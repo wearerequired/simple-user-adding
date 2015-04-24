@@ -24,37 +24,37 @@
 		switch ( $_GET['message'] ) {
 			case 'required_fields_missing':
 				$message = array(
-					'class' => 'error',
+					'class' => 'notice notice-error is-dismissible',
 					'text'  => __( 'Required fields missing.', 'simple-user-adding' )
 				);
 				break;
 			case 'enter_email':
 				$message = array(
-					'class' => 'error',
+					'class' => 'notice notice-error is-dismissible',
 					'text'  => __( 'Please enter a valid email address.', 'simple-user-adding' )
 				);
 				break;
 			case 'user_email_exists':
 				$message = array(
-					'class' => 'error',
+					'class' => 'notice notice-error is-dismissible',
 					'text'  => __( 'A user with this email address already exists.', 'simple-user-adding' )
 				);
 				break;
 			case 'user_name_exists':
 				$message = array(
-					'class' => 'error',
+					'class' => 'notice notice-error is-dismissible',
 					'text'  => __( 'A user with this username already exists.', 'simple-user-adding' )
 				);
 				break;
 			case 'success':
 				$message = array(
-					'class' => 'updated',
+					'class' => 'notice notice-success is-dismissible',
 					'text'  => __( 'User successfully added.', 'simple-user-adding' )
 				);
 				break;
 			case 'failure':
 				$message = array(
-					'class' => 'updated',
+					'class' => 'notice notice-success is-dismissible',
 					'text'  => __( 'There was an error adding the user. Please try again.', 'simple-user-adding' )
 				);
 				break;
@@ -139,7 +139,8 @@
 			<?php endforeach ?>
 			<?php if ( Simple_User_Adding_Plugin::$can_modify_email ) : ?>
 				<tr class="additional hidden">
-					<th scope="row"><label for="notification_msg"><?php _e( 'Message', 'simple-user-adding' ) ?></label></th>
+					<th scope="row"><label for="notification_msg"><?php _e( 'Message', 'simple-user-adding' ) ?></label>
+					</th>
 					<td>
 						<textarea name="notification_msg" id="notification_msg" class="regular-text"></textarea>
 
@@ -148,10 +149,9 @@
 				</tr>
 			<?php endif; ?>
 			<tr>
-				<th scope="row">
-				</th>
+				<th scope="row"></th>
 				<td>
-					<button id="sua_showmore" class="button-secondary" data-more="<?php _e( 'Show More', 'simple-user-adding' ); ?>" data-less="<?php _e( 'Show Less', 'simple-user-adding' ); ?>"><?php _e( 'Show More', 'simple-user-adding' ); ?></button>
+					<input type="button" id="sua_showmore" class="button-secondary" data-more="<?php _e( 'Show More', 'simple-user-adding' ); ?>" data-less="<?php _e( 'Show Less', 'simple-user-adding' ); ?>" value="<?php _e( 'Show More', 'simple-user-adding' ); ?>" />
 				</td>
 			</tr>
 		</table>

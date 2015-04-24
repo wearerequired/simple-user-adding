@@ -61,7 +61,7 @@
     $('#sua_showmore').click(function (e) {
       e.preventDefault();
       additionalFieldsShown = !additionalFieldsShown;
-      $(this).text(additionalFieldsShown ? $(this).attr('data-less') : $(this).attr('data-more'));
+      $(this).val(additionalFieldsShown ? $(this).attr('data-less') : $(this).attr('data-more'));
       $('#sua_createuser .additional').toggleClass('hidden');
     });
 

@@ -226,7 +226,7 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: views/simple-user-adding-form.php:146
+#: views/simple-user-adding-form.php:147
 msgid "This text is shown to the user in the confirmation email they receive."
 msgstr ""
 
