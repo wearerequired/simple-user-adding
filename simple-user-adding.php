@@ -1,290 +1,50 @@
 <?php
 /**
- * Simple User Adding
- *
- * @package   Simple_User_Adding
- * @author    Pascal Birchler <pascal@required.ch>
- * @license   GPL-2.0+
- * @link      https://github.com/wearerequired/simple-user-adding
- * @copyright 2015 required gmbh
- *
- * @wordpress-plugin
  * Plugin Name: Simple User Adding
- * Plugin URI:  https://github.com/wearerequired/simple-user-adding
+ * Plugin URI:  http://required.ch
  * Description: This plugin makes adding users to your WordPress site easier than ever before.
  * Version:     1.0.0
  * Author:      required+
  * Author URI:  http://required.ch
+ * License:     GPLv2+
  * Text Domain: simple-user-adding
- * License:     GPL-2.0+
- * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
  * Domain Path: /languages
  */
 
-// Don't call this file directly
-defined( 'ABSPATH' ) or die;
-
 /**
- * Class User_Feedback
+ * Copyright (c) 2015 required+ (email : support@required.ch)
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License, version 2 or, at
+ * your discretion, any later version, as published by the Free
+ * Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
-final class Simple_User_Adding {
 
-	/**
-	 * Plugin version used for enqueueing scripts and styles.
-	 *
-	 * @var string
-	 */
-	const VERSION = '1.0.0';
+defined( 'WPINC' ) or die;
 
-	/**
-	 * Can we overwrite the pluggable wp_new_user_notification() function?
-	 *
-	 * @var bool
-	 */
-	public static $can_modify_email = false;
+include( dirname( __FILE__ ) . '/lib/requirements-check.php' );
 
-	/**
-	 * Custom notification messagebeing sent to the newly added user.
-	 * @var string
-	 */
-	public static $notification_message = '';
+$simple_user_adding_requirements_check = new Simple_User_Adding_Requirements_Check( array(
+	'title' => 'Simple User Adding',
+	'php'   => '5.3',
+	'wp'    => '3.1',
+	'file'  => __FILE__,
+));
 
-	/**
-	 * Add all hooks on init
-	 */
-	public static function init() {
-		// Load plugin text domain
-		add_action( 'init', array( __CLASS__, 'load_plugin_textdomain' ) );
-
-		// Add the options page and menu item.
-		add_action( 'admin_menu', array( __CLASS__, 'add_plugin_admin_menu' ) );
-		add_filter( 'admin_footer_text', array( __CLASS__, 'add_admin_footer' ) );
-
-		// Add help tab
-		add_action( 'load-users_page_simple-user-adding', array( __CLASS__, 'add_admin_help_tab' ) );
-
-		// Handle form submissions
-		add_action( 'admin_post_simple_user_adding', array( __CLASS__, 'create_user' ) );
-
-		// Load admin style sheet and JavaScript.
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_enqueue_scripts' ) );
-	}
-
-	public static function load_plugin_textdomain() {
-		load_plugin_textdomain( 'simple-user-adding', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-	}
-
-	public static function add_plugin_admin_menu() {
-		add_users_page(
-			__( 'Add New User', 'simple-user-adding' ),
-			__( 'Add New', 'simple-user-adding' ),
-			'create_users',
-			'simple-user-adding',
-			array( __CLASS__, 'display_admin_page' )
-		);
-
-		remove_submenu_page( 'users.php', 'user-new.php' );
-	}
-
-	public static function display_admin_page() {
-		include_once( plugin_dir_path( __FILE__ ) . '/includes/simple-user-adding-form.php' );
-	}
-
-	public static function add_admin_footer() {
-		$screen = get_current_screen();
-		if ( 'users_page_simple-user-adding' !== $screen->id ) {
-			return;
-		}
-
-		$text = sprintf( __( '%s is brought to you by %s. We &hearts; WordPress.', 'simple-user-adding' ), 'Simple User Adding', '<a href="http://required.ch">required+</a>' );
-		$text .= ' <a href="' . admin_url( 'user-new.php' ) . '">' . __( 'Looking for the original Add User form?', 'wp-widget-disable' ) . '</a>';
-
-		return $text;
-	}
-
-	public static function add_admin_help_tab() {
-		$screen = get_current_screen();
-		if ( 'users_page_simple-user-adding' !== $screen->id ) {
-			return;
-		}
-
-		$help = '<p>' . __( 'To add a new user to your site, fill in the form on this screen and click the Add New User button at the bottom.', 'simple-user-adding' ) . '</p>';
-
-		if ( is_multisite() ) {
-			$help .= '<p>' . __( 'Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users.', 'simple-user-adding' ) . '</p>';
-		}
-
-		$help .= '<p>' . __( 'New users will receive an email letting them know they&#8217;ve been added as a user for your site. This email will also contain their automatically generated password.', 'simple-user-adding' ) . '</p>';
-		$help .= '<p>' . __( 'Remember to click the Add New User button at the bottom of this screen when you are finished.', 'simple-user-adding' ) . '</p>';
-
-		$screen->add_help_tab( array(
-			'id'      => 'overview',
-			'title'   => __( 'Overview', 'simple-user-adding' ),
-			'content' => $help,
-		) );
-
-		$screen->add_help_tab( array(
-			'id'      => 'user-roles',
-			'title'   => __( 'User Roles', 'simple-user-adding' ),
-			'content' => '<p>' . __( 'Here is a basic overview of the different user roles and the permissions associated with each one:', 'simple-user-adding' ) . '</p>' .
-			             '<ul>' .
-			             '<li>' . __( 'Subscribers can read comments/comment/receive newsletters, etc. but cannot create regular site content.', 'simple-user-adding' ) . '</li>' .
-			             '<li>' . __( 'Contributors can write and manage their posts but not publish posts or upload media files.', 'simple-user-adding' ) . '</li>' .
-			             '<li>' . __( 'Authors can publish and manage their own posts, and are able to upload files.', 'simple-user-adding' ) . '</li>' .
-			             '<li>' . __( 'Editors can publish posts, manage posts as well as manage other people&#8217;s posts, etc.', 'simple-user-adding' ) . '</li>' .
-			             '<li>' . __( 'Administrators have access to all the administration features.', 'simple-user-adding' ) . '</li>' .
-			             '</ul>'
-		) );
-
-		$screen->set_help_sidebar(
-			'<p><strong>' . __( 'For more information:', 'simple-user-adding' ) . '</strong></p>' .
-			'<p>' . __( '<a href="http://codex.wordpress.org/Users_Add_New_Screen" target="_blank">Documentation on Adding New Users</a>', 'simple-user-adding' ) . '</p>' .
-			'<p>' . __( '<a href="https://wordpress.org/support/" target="_blank">Support Forums</a>', 'simple-user-adding' ) . '</p>'
-		);
-	}
-
-	public static function admin_enqueue_scripts() {
-		$screen = get_current_screen();
-		if ( 'users_page_simple-user-adding' !== $screen->id ) {
-			return;
-		}
-
-		wp_enqueue_style( 'sua-admin-styles', plugins_url( 'css/simple-user-adding.css', __FILE__ ), array(), self::VERSION );
-		wp_enqueue_script( 'sua-admin-script', plugins_url( 'js/simple-user-adding.js', __FILE__ ), array( 'jquery' ), self::VERSION );
-	}
-
-	public static function create_user() {
-		/**
-		 * This checks for the correct referrer and the nonce.
-		 * On failure, the function dies after calling the wp_nonce_ays() function.
-		 */
-		check_admin_referer( 'simple-user-adding', 'simple_user_adding_nonce' );
-
-		if ( ! current_user_can( 'create_users' ) ) {
-			wp_die( __( 'Cheatin&#8217; uh?', 'simple-user-adding' ), 403 );
-		}
-
-		// todo: process form
-
-		// Check required fields
-		if ( ! isset( $_POST['user_login'] ) || empty( $_POST['user_login'] )
-		     || ! isset( $_POST['email'] ) || empty( $_POST['email'] )
-		) {
-			wp_redirect( add_query_arg(
-				array( 'message' => 'required_fields_missing' ),
-				admin_url( 'users.php?page=simple-user-adding' )
-			) );
-			die();
-		}
-
-		// Check if the email address is valid
-		$user_email = wp_unslash( $_POST['email'] );
-		if ( ! is_email( $user_email ) ) {
-			wp_redirect( add_query_arg(
-				array( 'message' => 'enter_email' ),
-				admin_url( 'users.php?page=simple-user-adding' )
-			) );
-			die();
-		}
-
-		// Check if a user with this email address already exists
-		if ( get_user_by( 'email', $user_email ) ) {
-			wp_redirect( add_query_arg(
-				array( 'message' => 'user_email_exists' ),
-				admin_url( 'users.php?page=simple-user-adding' )
-			) );
-			die();
-		}
-
-		// Check if a user with this login already exists
-		if ( get_user_by( 'login', wp_unslash( $_POST['user_login'] ) ) ) {
-			wp_redirect( add_query_arg(
-				array( 'message' => 'user_name_exists' ),
-				admin_url( 'users.php?page=simple-user-adding' )
-			) );
-			die();
-		}
-
-		// Set passwords for use in edit_user()
-		$_POST['pass2'] = $_POST['pass1'] = wp_generate_password( 24 );
-
-		// Set the flag to send a notification mail to the user
-		$_POST['send_password'] = true;
-
-		// Filter the user notification when there's a custom message
-		if ( self::$can_modify_email && isset( $_POST['notification_msg'] ) && ! empty( $_POST['notification_msg'] ) ) {
-			self::$notification_message = wp_kses( $_POST['notification_msg'], array() );
-
-			add_filter( 'sua_notificiation_message', array( __CLASS__, 'modify_notification_message' ) );
-		}
-
-		// This creates (or updates) a user
-		$user_id = edit_user();
-		if ( is_wp_error( $user_id ) ) {
-			wp_redirect( add_query_arg(
-				array( 'message' => 'failure' ),
-				admin_url( 'users.php?page=simple-user-adding' )
-			) );
-			die();
-		}
-
-		wp_redirect( add_query_arg(
-			array( 'message' => 'success' ),
-			admin_url( 'users.php?page=simple-user-adding' )
-		) );
-		die();
-	}
-
-	public static function modify_notification_message( $message ) {
-		if ( ! empty( self::$notification_message ) ) {
-			$message = self::$notification_message . "\r\n\r\n" . $message;
-		}
-
-		return $message;
-	}
-
+if ( $simple_user_adding_requirements_check->passes() ) {
+	// Pull in the plugin classes and initialize
+	include( dirname( __FILE__ ) . '/lib/wp-stack-plugin.php' );
+	include( dirname( __FILE__ ) . '/classes/plugin.php' );
+	Simple_User_Adding_Plugin::start( __FILE__ );
 }
 
-add_action( 'plugins_loaded', array( 'Simple_User_Adding', 'init' ) );
-
-if ( ! function_exists( 'wp_new_user_notification' ) ) :
-
-	Simple_User_Adding::$can_modify_email = true;
-
-	/**
-	 * Email login credentials to a newly-registered user.
-	 *
-	 * A new user registration notification is also sent to admin email.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @param int    $user_id        User ID.
-	 * @param string $plaintext_pass Optional. The user's plaintext password. Default empty.
-	 */
-	function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {
-		$user = get_userdata( $user_id );
-
-		// The blogname option is escaped with esc_html on the way into the database in sanitize_option
-		// we want to reverse this for the plain text arena of emails.
-		$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-
-		$message = sprintf( __( 'New user registration on your site %s:' ), $blogname ) . "\r\n\r\n";
-		$message .= sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n\r\n";
-		$message .= sprintf( __( 'E-mail: %s' ), $user->user_email ) . "\r\n";
-
-		@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration' ), $blogname ), $message );
-
-		if ( empty( $plaintext_pass ) ) {
-			return;
-		}
-
-		$message = sprintf( __( 'Username: %s' ), $user->user_login ) . "\r\n";
-		$message .= sprintf( __( 'Password: %s' ), $plaintext_pass ) . "\r\n";
-		$message .= wp_login_url() . "\r\n";
-
-		$message = apply_filters( 'sua_notificiation_message', $message, $user );
-
-		wp_mail( $user->user_email, sprintf( __( '[%s] Your username and password' ), $blogname ), $message );
-
-	}
-endif;
+unset( $simple_user_adding_requirements_check );
