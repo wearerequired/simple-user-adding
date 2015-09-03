@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Simple User Adding 1.0.0\n"
+"Project-Id-Version: Simple User Adding 1.1.0\n"
 "Report-Msgid-Bugs-To: http://required.ch\n"
 "POT-Creation-Date: 2015-03-29 12:16:28+00:00\n"
 "MIME-Version: 1.0\n"
@@ -24,29 +24,29 @@ msgstr ""
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
 
-#: classes/plugin.php:67 views/simple-user-adding-form.php:176
+#: classes/plugin.php:79 views/simple-user-adding-form.php:176
 msgid "Add New User"
 msgstr ""
 
-#: classes/plugin.php:68
+#: classes/plugin.php:80
 msgid "Add New"
 msgstr ""
 
-#: classes/plugin.php:85
+#: classes/plugin.php:105
 msgid "%s is brought to you by %s. We &hearts; WordPress."
 msgstr ""
 
-#: classes/plugin.php:86
+#: classes/plugin.php:106
 msgid "Looking for the original Add User form?"
 msgstr ""
 
-#: classes/plugin.php:97
+#: classes/plugin.php:120
 msgid ""
 "To add a new user to your site, fill in the form on this screen and click "
 "the Add New User button at the bottom."
 msgstr ""
 
-#: classes/plugin.php:100
+#: classes/plugin.php:123
 msgid ""
 "Because this is a multisite installation, you may add accounts that already "
 "exist on the Network by specifying a username or email, and defining a "
@@ -55,103 +55,112 @@ msgid ""
 "under Network Admin > All Users."
 msgstr ""
 
-#: classes/plugin.php:103
+#: classes/plugin.php:126
 msgid ""
 "New users will receive an email letting them know they&#8217;ve been added "
 "as a user for your site. This email will also contain their automatically "
 "generated password."
 msgstr ""
 
-#: classes/plugin.php:104
+#: classes/plugin.php:127
 msgid ""
 "Remember to click the Add New User button at the bottom of this screen when "
 "you are finished."
 msgstr ""
 
-#: classes/plugin.php:108
+#: classes/plugin.php:131
 msgid "Overview"
 msgstr ""
 
-#: classes/plugin.php:114
+#: classes/plugin.php:137
 msgid "User Roles"
 msgstr ""
 
-#: classes/plugin.php:115
+#: classes/plugin.php:138
 msgid ""
 "Here is a basic overview of the different user roles and the permissions "
 "associated with each one:"
 msgstr ""
 
-#: classes/plugin.php:117
+#: classes/plugin.php:140
 msgid ""
 "Subscribers can read comments/comment/receive newsletters, etc. but cannot "
 "create regular site content."
 msgstr ""
 
-#: classes/plugin.php:118
+#: classes/plugin.php:141
 msgid ""
 "Contributors can write and manage their posts but not publish posts or "
 "upload media files."
 msgstr ""
 
-#: classes/plugin.php:119
+#: classes/plugin.php:142
 msgid ""
 "Authors can publish and manage their own posts, and are able to upload "
 "files."
 msgstr ""
 
-#: classes/plugin.php:120
+#: classes/plugin.php:143
 msgid ""
 "Editors can publish posts, manage posts as well as manage other "
 "people&#8217;s posts, etc."
 msgstr ""
 
-#: classes/plugin.php:121
+#: classes/plugin.php:144
 msgid "Administrators have access to all the administration features."
 msgstr ""
 
-#: classes/plugin.php:126
+#: classes/plugin.php:149
 msgid "For more information:"
 msgstr ""
 
-#: classes/plugin.php:127
+#: classes/plugin.php:150
 msgid ""
 "<a href=\"http://codex.wordpress.org/Users_Add_New_Screen\" "
 "target=\"_blank\">Documentation on Adding New Users</a>"
 msgstr ""
 
-#: classes/plugin.php:128
+#: classes/plugin.php:151
 msgid ""
 "<a href=\"https://wordpress.org/support/\" target=\"_blank\">Support "
 "Forums</a>"
 msgstr ""
 
-#: classes/plugin.php:153
+#: classes/plugin.php:182
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: classes/plugin.php:254
+#: classes/plugin.php:294 classes/plugin.php:338
 msgid "New user registration on your site %s:"
 msgstr ""
 
-#: classes/plugin.php:255 classes/plugin.php:264
+#: classes/plugin.php:295 classes/plugin.php:305 classes/plugin.php:339
+#: classes/plugin.php:363
 msgid "Username: %s"
 msgstr ""
 
-#: classes/plugin.php:256
-msgid "E-mail: %s"
+#: classes/plugin.php:296 classes/plugin.php:340
+msgid "Email: %s"
 msgstr ""
 
-#: classes/plugin.php:258
+#: classes/plugin.php:298 classes/plugin.php:342
 msgid "[%s] New User Registration"
 msgstr ""
 
-#: classes/plugin.php:265
+#: classes/plugin.php:306
 msgid "Password: %s"
 msgstr ""
 
-#: classes/plugin.php:270
+#: classes/plugin.php:311
 msgid "[%s] Your username and password"
+msgstr ""
+
+#: classes/plugin.php:364
+msgid "To set your password, visit the following address:"
+msgstr ""
+
+#: classes/plugin.php:371
+msgid "[%s] Your username and password info"
 msgstr ""
 
 #: views/simple-user-adding-form.php:19
@@ -242,8 +251,8 @@ msgstr ""
 msgid "Simple User Adding"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "http://required.ch"
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/wearerequired/simple-user-adding/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -254,4 +263,8 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "required+"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://required.ch"
 msgstr ""
