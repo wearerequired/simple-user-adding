@@ -290,7 +290,7 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) :
 
 			$message = sprintf( __( 'New user registration on your site %s:', 'simple-user-adding' ), $blogname ) . "\r\n\r\n";
 			$message .= sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
-			$message .= sprintf( __( 'E-mail: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
+			$message .= sprintf( __( 'Email: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
 
 			@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'simple-user-adding' ), $blogname ), $message );
 
