@@ -242,8 +242,8 @@ msgstr ""
 msgid "Simple User Adding"
 msgstr ""
 
-#. Author URI of the plugin/theme
-msgid "http://required.ch"
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/wearerequired/simple-user-adding/"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -254,4 +254,8 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "required+"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://required.ch"
 msgstr ""
