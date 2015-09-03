@@ -29,6 +29,10 @@
 			firstName = parts[ 0 ] ? parts[ 0 ] : '';
 			lastName = parts[ 1 ] ? parts[ 1 ] : '';
 
+			if ( lastName.indexOf( '+' ) >= 0 ) {
+				lastName = lastName.substr ( 0, lastName.indexOf( '+' ) );
+			}
+
 			if ( 0 === firstName.length || firstNameField.val().length > 0 || lastNameField.val().length > 0 ) {
 				$( '#sua_email_note' ).addClass( 'hidden' );
 				return;
