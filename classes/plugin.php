@@ -288,11 +288,15 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) :
 			// we want to reverse this for the plain text arena of emails.
 			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
-			$message = sprintf( __( 'New user registration on your site %s:', 'simple-user-adding' ), $blogname ) . "\r\n\r\n";
-			$message .= sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
-			$message .= sprintf( __( 'Email: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
+			if ( class_exists( 'WP_Digest_Queue' ) ) {
+				WP_Digest_Queue::add( get_option( 'admin_email' ), 'new_user_notification', $user_id );
+			} else {
+				$message = sprintf( __( 'New user registration on your site %s:', 'simple-user-adding' ), $blogname ) . "\r\n\r\n";
+				$message .= sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
+				$message .= sprintf( __( 'Email: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
 
-			@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'simple-user-adding' ), $blogname ), $message );
+				@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'simple-user-adding' ), $blogname ), $message );
+			}
 
 			if ( empty( $plaintext_pass ) ) {
 				return;
@@ -328,11 +332,15 @@ if ( ! function_exists( 'wp_new_user_notification' ) ) :
 			// we want to reverse this for the plain text arena of emails.
 			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 
-			$message = sprintf( __( 'New user registration on your site %s:', 'simple-user-adding' ), $blogname ) . "\r\n\r\n";
-			$message .= sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
-			$message .= sprintf( __( 'Email: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
+			if ( class_exists( 'WP_Digest_Queue' ) ) {
+				WP_Digest_Queue::add( get_option( 'admin_email' ), 'new_user_notification', $user_id );
+			} else {
+				$message = sprintf( __( 'New user registration on your site %s:', 'simple-user-adding' ), $blogname ) . "\r\n\r\n";
+				$message .= sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
+				$message .= sprintf( __( 'Email: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
 
-			@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'simple-user-adding' ), $blogname ), $message );
+				@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'simple-user-adding' ), $blogname ), $message );
+			}
 
 			if ( 'admin' === $notify || empty( $notify ) ) {
 				return;
