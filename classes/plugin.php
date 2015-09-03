@@ -95,12 +95,12 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 	/**
 	 * Add some text in the footer of our admin page.
 	 *
-	 * @return string|void
+	 * @return string
 	 */
 	public function admin_footer_text() {
 		$screen = get_current_screen();
 		if ( 'users_page_simple-user-adding' !== $screen->id ) {
-			return;
+			return '';
 		}
 		$text = sprintf( __( '%s is brought to you by %s. We &hearts; WordPress.', 'simple-user-adding' ), 'Simple User Adding', '<a href="http://required.ch">required+</a>' );
 		$text .= ' <a href="' . admin_url( 'user-new.php' ) . '">' . __( 'Looking for the original Add User form?', 'simple-user-adding' ) . '</a>';
