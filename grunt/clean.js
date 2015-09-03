@@ -8,8 +8,5 @@ module.exports = {
 		'!js/*.min.js',
 		'js/*.js.map',
 		'!js/*.min.js.map',
-	],
-	svn_readme_md: [
-		'release/svn/readme.md'
 	]
 }
