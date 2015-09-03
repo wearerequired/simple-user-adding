@@ -1,8 +1,16 @@
 <?php
+/**
+ * Simple User Adding
+ *
+ * @package Simple_User_Adding
+ */
+
 defined( 'WPINC' ) or die;
 
+/**
+ * Simple_User_Adding_Plugin class.
+ */
 class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
-
 	/**
 	 * Plugin version.
 	 */
@@ -16,6 +24,8 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 	public static $can_modify_email = false;
 
 	/**
+	 * Instance of this class.
+	 *
 	 * @var self
 	 */
 	protected static $instance;
@@ -40,18 +50,17 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 	public function add_hooks() {
 		$this->hook( 'init' );
 
-		// Add the options page with the custom admin footer text
+		// Add the options page with the custom admin footer text.
 		$this->hook( 'admin_menu' );
 		$this->hook( 'admin_footer_text' );
 
-		// Add help tab
+		// Add help tab.
 		$this->hook( 'load-users_page_simple-user-adding', 'admin_help_tab' );
-
 
 		// Load admin style sheet and JavaScript.
 		$this->hook( 'admin_enqueue_scripts' );
 
-		// Handle form submissions
+		// Handle form submissions.
 		$this->hook( 'admin_post_simple_user_adding', 'create_user' );
 	}
 
@@ -62,6 +71,9 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		$this->load_textdomain( 'simple-user-adding', '/languages' );
 	}
 
+	/**
+	 * Add a new admin menu item.
+	 */
 	public function admin_menu() {
 		add_users_page(
 			__( 'Add New User', 'simple-user-adding' ),
@@ -73,10 +85,18 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		remove_submenu_page( 'users.php', 'user-new.php' );
 	}
 
+	/**
+	 * Output the content for the new admin page.
+	 */
 	public function display_admin_page() {
 		$this->include_file( 'views/simple-user-adding-form.php' );
 	}
 
+	/**
+	 * Add some text in the footer of our admin page.
+	 *
+	 * @return string|void
+	 */
 	public function admin_footer_text() {
 		$screen = get_current_screen();
 		if ( 'users_page_simple-user-adding' !== $screen->id ) {
@@ -88,6 +108,9 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		return $text;
 	}
 
+	/**
+	 * Add help text to our admin page.
+	 */
 	public function admin_help_tab() {
 		$screen = get_current_screen();
 		if ( 'users_page_simple-user-adding' !== $screen->id ) {
@@ -119,7 +142,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 			             '<li>' . __( 'Authors can publish and manage their own posts, and are able to upload files.', 'simple-user-adding' ) . '</li>' .
 			             '<li>' . __( 'Editors can publish posts, manage posts as well as manage other people&#8217;s posts, etc.', 'simple-user-adding' ) . '</li>' .
 			             '<li>' . __( 'Administrators have access to all the administration features.', 'simple-user-adding' ) . '</li>' .
-			             '</ul>'
+			             '</ul>',
 		) );
 
 		$screen->set_help_sidebar(
@@ -129,6 +152,9 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		);
 	}
 
+	/**
+	 * Enqueue scripts and styles on our admin page.
+	 */
 	public function admin_enqueue_scripts() {
 		$screen = get_current_screen();
 
@@ -142,6 +168,9 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		wp_enqueue_script( 'sua-admin-script', $this->get_url() . 'js/simple-user-adding' . $suffix . '.js', array( 'jquery' ), self::VERSION );
 	}
 
+	/**
+	 * Handle form submissions.
+	 */
 	public function create_user() {
 		/**
 		 * This checks for the correct referrer and the nonce.
@@ -153,7 +182,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 			wp_die( __( 'Cheatin&#8217; uh?', 'simple-user-adding' ), 403 );
 		}
 
-		// Check required fields
+		// Check required fields.
 		if ( ! isset( $_POST['user_login'] ) || empty( $_POST['user_login'] )
 		     || ! isset( $_POST['email'] ) || empty( $_POST['email'] )
 		) {
@@ -164,7 +193,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 			die();
 		}
 
-		// Check if the email address is valid
+		// Check if the email address is valid.
 		$user_email = wp_unslash( $_POST['email'] );
 		if ( ! is_email( $user_email ) ) {
 			wp_redirect( add_query_arg(
@@ -174,7 +203,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 			die();
 		}
 
-		// Check if a user with this email address already exists
+		// Check if a user with this email address already exists.
 		if ( get_user_by( 'email', $user_email ) ) {
 			wp_redirect( add_query_arg(
 				array( 'message' => 'user_email_exists' ),
@@ -183,7 +212,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 			die();
 		}
 
-		// Check if a user with this login already exists
+		// Check if a user with this login already exists.
 		if ( get_user_by( 'login', wp_unslash( $_POST['user_login'] ) ) ) {
 			wp_redirect( add_query_arg(
 				array( 'message' => 'user_name_exists' ),
@@ -192,20 +221,20 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 			die();
 		}
 
-		// Set passwords for use in edit_user()
+		// Set passwords for use in edit_user().
 		$_POST['pass2'] = $_POST['pass1'] = wp_generate_password( 24 );
 
-		// Set the flag to send a notification mail to the user
+		// Set the flag to send a notification mail to the user.
 		$_POST['send_password'] = true;
 
-		// Filter the user notification when there's a custom message
+		// Filter the user notification when there's a custom message.
 		if ( self::$can_modify_email && isset( $_POST['notification_msg'] ) && ! empty( $_POST['notification_msg'] ) ) {
 			$this->notification_message = wp_kses( $_POST['notification_msg'], array() );
 
 			add_filter( 'sua_notification_message', array( $this, 'modify_notification_message' ) );
 		}
 
-		// This creates (or updates) a user
+		// This creates (or updates) a user.
 		$user_id = edit_user();
 		if ( is_wp_error( $user_id ) ) {
 			wp_redirect( add_query_arg(
@@ -222,6 +251,13 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		die();
 	}
 
+	/**
+	 * Filter the new user notification message.
+	 *
+	 * @param string $message The notification message.
+	 *
+	 * @return string
+	 */
 	public function modify_notification_message( $message ) {
 		if ( ! empty( $this->notification_message ) ) {
 			$message = $this->notification_message . "\r\n\r\n" . $message;
