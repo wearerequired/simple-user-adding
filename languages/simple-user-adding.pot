@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Simple User Adding 1.0.0\n"
+"Project-Id-Version: Simple User Adding 1.1.0\n"
 "Report-Msgid-Bugs-To: http://required.ch\n"
 "POT-Creation-Date: 2015-03-29 12:16:28+00:00\n"
 "MIME-Version: 1.0\n"
@@ -130,36 +130,36 @@ msgstr ""
 msgid "Cheatin&#8217; uh?"
 msgstr ""
 
-#: classes/plugin.php:291 classes/plugin.php:331
+#: classes/plugin.php:294 classes/plugin.php:338
 msgid "New user registration on your site %s:"
 msgstr ""
 
-#: classes/plugin.php:292 classes/plugin.php:301 classes/plugin.php:332
-#: classes/plugin.php:355
+#: classes/plugin.php:295 classes/plugin.php:305 classes/plugin.php:339
+#: classes/plugin.php:363
 msgid "Username: %s"
 msgstr ""
 
-#: classes/plugin.php:293 classes/plugin.php:333
+#: classes/plugin.php:296 classes/plugin.php:340
 msgid "Email: %s"
 msgstr ""
 
-#: classes/plugin.php:295 classes/plugin.php:335
+#: classes/plugin.php:298 classes/plugin.php:342
 msgid "[%s] New User Registration"
 msgstr ""
 
-#: classes/plugin.php:302
+#: classes/plugin.php:306
 msgid "Password: %s"
 msgstr ""
 
-#: classes/plugin.php:307
+#: classes/plugin.php:311
 msgid "[%s] Your username and password"
 msgstr ""
 
-#: classes/plugin.php:356
+#: classes/plugin.php:364
 msgid "To set your password, visit the following address:"
 msgstr ""
 
-#: classes/plugin.php:363
+#: classes/plugin.php:371
 msgid "[%s] Your username and password info"
 msgstr ""
 
