@@ -82,17 +82,17 @@
 					</label>
 				</th>
 				<td>
-					<input type="text" id="user_login" name="user_login" class="regular-text" />
+					<input type="text" id="user_login" name="user_login" class="regular-text" aria-required="true" autocapitalize="none" autocorrect="off" maxlength="60" />
 				</td>
 			</tr>
 			<tr class="form-required">
 				<th scope="row">
-					<label for="email"><?php _e( 'E-mail', 'simple-user-adding' ); ?>
+					<label for="email"><?php _e( 'Email', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
 					</label>
 				</th>
 				<td>
-					<input type="email" id="email" name="email" class="regular-text" />
+					<input type="email" id="email" name="email" class="regular-text" aria-required="true" autocapitalize="none" autocorrect="off" />
 
 					<div id="sua_email_note" class="hidden">
 						<p>

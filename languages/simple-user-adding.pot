@@ -200,7 +200,7 @@ msgid "(required)"
 msgstr ""
 
 #: views/simple-user-adding-form.php:90
-msgid "E-mail"
+msgid "Email"
 msgstr ""
 
 #: views/simple-user-adding-form.php:99
