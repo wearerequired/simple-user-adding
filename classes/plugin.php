@@ -14,7 +14,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 	/**
 	 * Plugin version.
 	 */
-	const VERSION = '1.1.0';
+	const VERSION = '1.1.1';
 
 	/**
 	 * Can we overwrite the pluggable wp_new_user_notification() function?

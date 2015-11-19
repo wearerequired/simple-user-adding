@@ -3,8 +3,8 @@ Contributors:      wearerequired, swissspidy
 Donate link:       http://required.ch  
 Tags:              admin, email, users, form, registration  
 Requires at least: 3.1  
-Tested up to:      4.3  
-Stable tag:        1.0.0  
+Tested up to:      4.4  
+Stable tag:        1.1.1  
 License:           GPLv2 or later  
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -55,6 +55,9 @@ Developed by [required+](http://required.ch/ "Team of experienced web profession
 
 ## Changelog ##
 
+### 1.1.1 ###
+* Enhancement: Small improvements to the user adding form.
+
 ### 1.1.0 ###
 * Enhancement: Now supports the Digest Notifications plugin.
 * Enhancement: Improved name guessing from email address.
@@ -64,6 +67,9 @@ Developed by [required+](http://required.ch/ "Team of experienced web profession
 * First release
 
 ## Upgrade Notice ##
+
+### 1.1.1 ###
+Being 100% compatible with WordPress 4.4, this update includes some smaller enhancements.
 
 ### 1.1.0 ###
 Being 100% compatible with WordPress 4.3, this update includes some smaller enhancements.

@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Simple User Adding 1.1.0\n"
+"Project-Id-Version: Simple User Adding 1.1.1\n"
 "Report-Msgid-Bugs-To: http://required.ch\n"
 "POT-Creation-Date: 2015-03-29 12:16:28+00:00\n"
 "MIME-Version: 1.0\n"

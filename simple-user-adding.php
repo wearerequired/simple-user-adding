@@ -3,7 +3,7 @@
  * Plugin Name: Simple User Adding
  * Plugin URI:  https://github.com/wearerequired/simple-user-adding/
  * Description: This plugin makes adding users to your WordPress site easier than ever before.
- * Version:     1.1.0
+ * Version:     1.1.1
  * Author:      required+
  * Author URI:  http://required.ch
  * License:     GPLv2+
