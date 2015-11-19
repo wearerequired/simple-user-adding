@@ -87,7 +87,7 @@
 			</tr>
 			<tr class="form-required">
 				<th scope="row">
-					<label for="email"><?php _e( 'E-mail', 'simple-user-adding' ); ?>
+					<label for="email"><?php _e( 'Email', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
 					</label>
 				</th>
