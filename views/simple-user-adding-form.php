@@ -82,7 +82,7 @@
 					</label>
 				</th>
 				<td>
-					<input type="text" id="user_login" name="user_login" class="regular-text" />
+					<input type="text" id="user_login" name="user_login" class="regular-text" aria-required="true" autocapitalize="none" autocorrect="off" maxlength="60" />
 				</td>
 			</tr>
 			<tr class="form-required">
@@ -92,7 +92,7 @@
 					</label>
 				</th>
 				<td>
-					<input type="email" id="email" name="email" class="regular-text" />
+					<input type="email" id="email" name="email" class="regular-text" aria-required="true" autocapitalize="none" autocorrect="off" />
 
 					<div id="sua_email_note" class="hidden">
 						<p>
