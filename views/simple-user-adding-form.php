@@ -11,6 +11,10 @@
  * @link      http://wp.required.ch/plugins/wp-widget-disable
  * @copyright 2015 required gmbh
  */
+
+// Load up the passed data, else set to a default.
+$creating = isset( $_POST['createuser'] );
+$new_user_send_notification = ( $creating && ! isset( $_POST['send_user_notification'] ) ) ? false : true;
 ?>
 
 <div class="wrap">
@@ -89,7 +93,7 @@
 					<input type="text" id="user_login" name="user_login" class="regular-text wp-suggest-user" aria-required="true" autocapitalize="none" autocorrect="off" maxlength="60" />
 				</td>
 			</tr>
-			<tr class="form-required">
+			<tr class="form-required notification_email_row">
 				<th scope="row">
 					<label for="email"><?php _e( 'Email', 'simple-user-adding' ); ?>
 						<span class="description"><?php _e( '(required)', 'simple-user-adding' ); ?></span>
@@ -116,6 +120,30 @@
 					</select>
 				</td>
 			</tr>
+			<tr>
+				<th scope="row">
+					<?php
+					if ( is_multisite() ) {
+						_e( 'Send Confirmation Email', 'simple-user-adding' );
+					} else {
+						_e( 'Send User Notification', 'simple-user-adding' );
+					}
+					?>
+				</th>
+				<td>
+					<input type="checkbox" name="send_user_notification" id="send_user_notification" value="1" <?php checked( $new_user_send_notification ); ?> />
+					<label for="send_user_notification">
+						<?php
+						if ( is_multisite() ) {
+							_e( 'Send an email to that person asking them to confirm the invite.', 'simple-user-adding' );
+						} else {
+							_e( 'Send the new user an email about their account.', 'simple-user-adding' );
+						}
+						?>
+						<?php  ?>
+					</label></td>
+			</tr>
+			<?php if ( ! is_multisite() ) : ?>
 			<tr class="additional hidden">
 				<th scope="row">
 					<label for="first_name"><?php _e( 'Name', 'simple-user-adding' ); ?></label>
@@ -141,8 +169,9 @@
 					</td>
 				</tr>
 			<?php endforeach ?>
+			<?php endif; ?>
 			<?php if ( simple_user_adding()->can_modify_email() ) : ?>
-				<tr class="additional hidden">
+				<tr class="notification_msg_row<?php if ( ! is_multisite() ) : ?> additional hidden<?php endif; ?><?php if ( ! $new_user_send_notification ) : ?> disabled<?php endif; ?>">
 					<th scope="row"><label for="notification_msg"><?php _e( 'Message', 'simple-user-adding' ) ?></label>
 					</th>
 					<td>
@@ -152,12 +181,14 @@
 					</td>
 				</tr>
 			<?php endif; ?>
+			<?php if ( ! is_multisite() ) : ?>
 			<tr>
 				<th scope="row"></th>
 				<td>
 					<input type="button" id="sua_showmore" class="button-secondary" data-more="<?php _e( 'Show More', 'simple-user-adding' ); ?>" data-less="<?php _e( 'Show Less', 'simple-user-adding' ); ?>" value="<?php _e( 'Show More', 'simple-user-adding' ); ?>" />
 				</td>
 			</tr>
+			<?php endif; ?>
 		</table>
 
 		<?php

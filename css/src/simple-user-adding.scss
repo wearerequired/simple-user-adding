@@ -1,6 +1,6 @@
 /**
  * Simple User Adding
- * http://required.ch
+ * https://required.ch
  *
  * Copyright (c) 2015 required+
  * Licensed under the GPLv2+ license.
@@ -27,4 +27,8 @@
 #notification_msg {
 	width: 25em;
 	height: 120px;
+}
+
+.disabled {
+	display: none;
 }
