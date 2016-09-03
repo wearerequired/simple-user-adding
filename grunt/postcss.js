@@ -2,12 +2,12 @@ module.exports = {
 	options: {
 		// or
 		map: {
-			inline: false, // save all sourcemaps as separate files...
+			inline:     false, // save all source maps as separate files...
 			annotation: 'css/' // ...to the specified directory
 		},
 
 		processors: [
-			require( 'autoprefixer-core' )( {
+			require( 'autoprefixer' )( {
 				browsers: [
 					'last 2 versions',
 					'> 5%',
@@ -17,8 +17,8 @@ module.exports = {
 			require( 'cssnano' )() // minify the result
 		]
 	},
-	dist: {
-		src: 'css/simple-user-adding.css',
+	dist:    {
+		src:  'css/simple-user-adding.css',
 		dest: 'css/simple-user-adding.min.css'
 	}
-}
+};

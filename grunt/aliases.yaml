@@ -1,12 +1,11 @@
 # Default task
 default:
 - 'checktextdomain'
-- 'makepot'
 - 'replace:header'
 - 'replace:plugin'
 - 'jshint'
-- 'concat'
 - 'uglify'
+- 'concat'
 - 'sass'
 - 'postcss'
 - 'clean:js'
