@@ -5,12 +5,12 @@
  * @package Simple_User_Adding
  */
 
-defined( 'WPINC' ) or die;
+namespace Required\Simple_User_Adding;
 
 /**
  * Simple_User_Adding_Plugin class.
  */
-class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
+class Controller {
 	/**
 	 * Plugin version.
 	 */
@@ -21,14 +21,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 	 *
 	 * @var bool
 	 */
-	public static $can_modify_email = false;
-
-	/**
-	 * Instance of this class.
-	 *
-	 * @var self
-	 */
-	protected static $instance;
+	protected $can_modify_email = false;
 
 	/**
 	 * Custom notification message being sent to the newly added user.
@@ -38,37 +31,89 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 	protected $notification_message = '';
 
 	/**
-	 * Constructs the object, hooks in to `plugins_loaded`.
+	 * The full path and filename of the main plugin file.
+	 *
+	 * @var string
 	 */
-	protected function __construct() {
-		$this->hook( 'plugins_loaded', 'add_hooks' );
+	protected $file;
+
+	/**
+	 * Constructs the object, hooks in to {@see 'plugins_loaded'}.
+	 *
+	 * @param string $file Full path to the main plugin file.
+	 */
+	public function __construct( $file ) {
+		$this->file = $file;
 	}
 
 	/**
 	 * Adds hooks.
 	 */
 	public function add_hooks() {
-		$this->hook( 'init' );
+		add_action( 'init', array( $this, 'load_textdomain' ) );
 
 		// Add the options page with the custom admin footer text.
-		$this->hook( 'admin_menu' );
-		$this->hook( 'admin_footer_text' );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_footer_text', array( $this, 'admin_footer_text' ) );
 
 		// Add help tab.
-		$this->hook( 'load-users_page_simple-user-adding', 'admin_help_tab' );
+		add_action( 'load-users_page_simple-user-adding', array( $this, 'admin_help_tab' ) );
 
 		// Load admin style sheet and JavaScript.
-		$this->hook( 'admin_enqueue_scripts' );
+		add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 		// Handle form submissions.
-		$this->hook( 'admin_post_simple_user_adding', 'create_user' );
+		add_action( 'admin_post_simple_user_adding', array( $this, 'create_user' ) );
+	}
+
+	/**
+	 * Returns the URL to the plugin directory (with trailing slash).
+	 *
+	 * @return string The URL to the plugin directory.
+	 */
+	public function get_url() {
+		return plugin_dir_url( $this->file );
+	}
+
+	/**
+	 * Returns the absolute path to the plugin directory (with trailing slash).
+	 *
+	 * @return string The absolute path to the plugin directory.
+	 */
+	public function get_path() {
+		return plugin_dir_path( $this->file );
+	}
+
+	/**
+	 * Returns the basename of the plugin.
+	 *
+	 * @return string The name of the plugin.
+	 */
+	public function get_basename() {
+		return plugin_basename( $this->file );
 	}
 
 	/**
 	 * Initializes the plugin, registers textdomain, etc.
+	 *
+	 * @return bool True if the textdomain was loaded successfully, false otherwise.
 	 */
-	public function init() {
-		$this->load_textdomain( 'simple-user-adding', '/languages' );
+	public function load_textdomain() {
+		return load_plugin_textdomain( 'simple-user-adding', false, $this->get_path() . 'languages' );
+	}
+
+	/**
+	 * Whether the plugin can modify the emails being sent or not.
+	 *
+	 * @param bool $possible Optional. The value to set. Default null.
+	 * @return bool Whether the plugin can modify the emails being sent or not.
+	 */
+	public function can_modify_email( $possible = null ) {
+		if ( null !== $possible ) {
+			$this->can_modify_email = (bool) $possible;
+		}
+
+		return $this->can_modify_email;
 	}
 
 	/**
@@ -89,7 +134,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 	 * Output the content for the new admin page.
 	 */
 	public function display_admin_page() {
-		$this->include_file( 'views/simple-user-adding-form.php' );
+		include $this->get_path() . 'views/simple-user-adding-form.php';
 	}
 
 	/**
@@ -165,7 +210,14 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 		wp_enqueue_style( 'sua-admin-styles', $this->get_url() . 'css/simple-user-adding' . $suffix . '.css', array(), self::VERSION );
-		wp_enqueue_script( 'sua-admin-script', $this->get_url() . 'js/simple-user-adding' . $suffix . '.js', array( 'jquery' ), self::VERSION );
+
+		$dependencies = array( 'jquery' );
+
+		if ( is_multisite() ) {
+			$dependencies[] = 'user-suggest';
+		}
+
+		wp_enqueue_script( 'sua-admin-script', $this->get_url() . 'js/simple-user-adding' . $suffix . '.js', $dependencies, self::VERSION );
 	}
 
 	/**
@@ -228,7 +280,7 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		$_POST['send_password'] = true;
 
 		// Filter the user notification when there's a custom message.
-		if ( self::$can_modify_email && isset( $_POST['notification_msg'] ) && ! empty( $_POST['notification_msg'] ) ) {
+		if ( $this->can_modify_email && isset( $_POST['notification_msg'] ) && ! empty( $_POST['notification_msg'] ) ) {
 			$this->notification_message = wp_kses( $_POST['notification_msg'], array() );
 
 			add_filter( 'sua_notification_message', array( $this, 'modify_notification_message' ) );
@@ -266,109 +318,3 @@ class Simple_User_Adding_Plugin extends WP_Stack_Plugin2 {
 		return $message;
 	}
 }
-
-if ( ! function_exists( 'wp_new_user_notification' ) ) :
-	Simple_User_Adding_Plugin::$can_modify_email = true;
-
-	if ( version_compare( $wp_version, '4.3', '<' ) ) {
-		/**
-		 * Email login credentials to a newly-registered user.
-		 *
-		 * A new user registration notification is also sent to admin email.
-		 *
-		 * @since 2.0.0
-		 *
-		 * @param int    $user_id        User ID.
-		 * @param string $plaintext_pass Optional. The user's plaintext password. Default empty.
-		 */
-		function wp_new_user_notification( $user_id, $plaintext_pass = '' ) {
-			$user = get_userdata( $user_id );
-
-			// The blogname option is escaped with esc_html on the way into the database in sanitize_option
-			// we want to reverse this for the plain text arena of emails.
-			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-
-			if ( class_exists( 'WP_Digest_Queue' ) ) {
-				WP_Digest_Queue::add( get_option( 'admin_email' ), 'new_user_notification', $user_id );
-			} else {
-				$message = sprintf( __( 'New user registration on your site %s:', 'simple-user-adding' ), $blogname ) . "\r\n\r\n";
-				$message .= sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
-				$message .= sprintf( __( 'Email: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
-
-				@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'simple-user-adding' ), $blogname ), $message );
-			}
-
-			if ( empty( $plaintext_pass ) ) {
-				return;
-			}
-
-			$message = sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n";
-			$message .= sprintf( __( 'Password: %s', 'simple-user-adding' ), $plaintext_pass ) . "\r\n";
-			$message .= wp_login_url() . "\r\n";
-
-			$message = apply_filters( 'sua_notification_message', $message, $user );
-
-			wp_mail( $user->user_email, sprintf( __( '[%s] Your username and password', 'simple-user-adding' ), $blogname ), $message );
-		}
-	} else {
-		/**
-		 * Email login credentials to a newly-registered user.
-		 *
-		 * A new user registration notification is also sent to admin email.
-		 *
-		 * @since 2.0.0
-		 * @since 4.3.0 The `$plaintext_pass` parameter was changed to `$notify`.
-		 *
-		 * @param int    $user_id User ID.
-		 * @param string $notify  Optional. Type of notification that should happen. Accepts 'admin' or an empty
-		 *                        string (admin only), or 'both' (admin and user). The empty string value was kept
-		 *                        for backward-compatibility purposes with the renamed parameter. Default empty.
-		 */
-		function wp_new_user_notification( $user_id, $notify = '' ) {
-			global $wpdb;
-			$user = get_userdata( $user_id );
-
-			// The blogname option is escaped with esc_html on the way into the database in sanitize_option
-			// we want to reverse this for the plain text arena of emails.
-			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
-
-			if ( class_exists( 'WP_Digest_Queue' ) ) {
-				WP_Digest_Queue::add( get_option( 'admin_email' ), 'new_user_notification', $user_id );
-			} else {
-				$message = sprintf( __( 'New user registration on your site %s:', 'simple-user-adding' ), $blogname ) . "\r\n\r\n";
-				$message .= sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
-				$message .= sprintf( __( 'Email: %s', 'simple-user-adding' ), $user->user_email ) . "\r\n";
-
-				@wp_mail( get_option( 'admin_email' ), sprintf( __( '[%s] New User Registration', 'simple-user-adding' ), $blogname ), $message );
-			}
-
-			if ( 'admin' === $notify || empty( $notify ) ) {
-				return;
-			}
-
-			// Generate something random for a password reset key.
-			$key = wp_generate_password( 20, false );
-
-			/** This action is documented in wp-login.php */
-			do_action( 'retrieve_password_key', $user->user_login, $key );
-
-			// Now insert the key, hashed, into the DB.
-			if ( empty( $wp_hasher ) ) {
-				require_once ABSPATH . WPINC . '/class-phpass.php';
-				$wp_hasher = new PasswordHash( 8, true );
-			}
-			$hashed = time() . ':' . $wp_hasher->HashPassword( $key );
-			$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user->user_login ) );
-
-			$message = sprintf( __( 'Username: %s', 'simple-user-adding' ), $user->user_login ) . "\r\n\r\n";
-			$message .= __( 'To set your password, visit the following address:', 'simple-user-adding' ) . "\r\n\r\n";
-			$message .= '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user->user_login ), 'login' ) . ">\r\n\r\n";
-
-			$message .= wp_login_url() . "\r\n";
-
-			$message = apply_filters( 'sua_notification_message', $message, $user );
-
-			wp_mail( $user->user_email, sprintf( __( '[%s] Your username and password info', 'simple-user-adding' ), $blogname ), $message );
-		}
-	}
-endif;

@@ -16,7 +16,11 @@
 <div class="wrap">
 	<h2><?php echo esc_html( get_admin_page_title() ); ?></h2>
 
+	<?php if ( is_multisite() ) : ?>
+	<p><?php _e( 'Enter the email address or username of an existing user on this network to invite them to this site. If the user does not yet exist, it will be created automatically.', 'simple-user-adding' ); ?></p>
+	<?php else : ?>
 	<p><?php _e( 'Create a brand new user and add them to this site.', 'simple-user-adding' ); ?></p>
+	<?php endif; ?>
 
 	<?php
 	$message = array();
@@ -82,7 +86,7 @@
 					</label>
 				</th>
 				<td>
-					<input type="text" id="user_login" name="user_login" class="regular-text" aria-required="true" autocapitalize="none" autocorrect="off" maxlength="60" />
+					<input type="text" id="user_login" name="user_login" class="regular-text wp-suggest-user" aria-required="true" autocapitalize="none" autocorrect="off" maxlength="60" />
 				</td>
 			</tr>
 			<tr class="form-required">
@@ -137,7 +141,7 @@
 					</td>
 				</tr>
 			<?php endforeach ?>
-			<?php if ( Simple_User_Adding_Plugin::$can_modify_email ) : ?>
+			<?php if ( simple_user_adding()->can_modify_email() ) : ?>
 				<tr class="additional hidden">
 					<th scope="row"><label for="notification_msg"><?php _e( 'Message', 'simple-user-adding' ) ?></label>
 					</th>

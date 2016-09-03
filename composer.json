@@ -1,17 +1,38 @@
 {
-  "name": "wearerequired/simple-user-adding",
-  "description": "This plugin makes adding users to your WordPress site easier than ever before.",
-  "version": "1.0.0",
-  "type": "wordpress-plugin",
-  "license": "GPL-2.0+",
-  "authors": [
-	{
-	  "name": "required+",
-	  "email": "support@required.ch",
-	  "homepage": "http://required.ch",
-	  "role": "Developer"
-	}
+  "name":         "wearerequired/simple-user-adding",
+  "description":  "This plugin makes adding users to your WordPress site easier than ever before.",
+  "version":      "1.0.0",
+  "type":         "wordpress-plugin",
+  "license":      "GPL-2.0+",
+  "authors":      [
+    {
+      "name":     "required+",
+      "email":    "support@required.ch",
+      "homepage": "https://required.ch",
+      "role":     "Developer"
+    }
   ],
-  "require": {
+  "repositories": [
+    {
+      "type": "vcs",
+      "url":  "https://github.com/wearerequired/wp-requirements-check"
+    }
+  ],
+  "require":      {
+    "php":                                 ">=5.4",
+    "wearerequired/wp-requirements-check": "dev-master"
+  },
+  "require-dev":  {
+    "phpmd/phpmd":              "~2.4.0",
+    "wp-coding-standards/wpcs": "~0.10.0"
+  },
+  "scripts":      {
+    "post-install-cmd": "\"vendor/bin/phpcs\" --config-set installed_paths vendor/wp-coding-standards/wpcs",
+    "post-update-cmd":  "\"vendor/bin/phpcs\" --config-set installed_paths vendor/wp-coding-standards/wpcs"
+  },
+  "autoload":     {
+    "psr-4": {
+      "Required\\Simple_User_Adding\\": "classes"
+    }
   }
 }

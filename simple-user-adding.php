@@ -31,20 +31,19 @@
 
 defined( 'WPINC' ) or die;
 
-include( dirname( __FILE__ ) . '/lib/requirements-check.php' );
-
-$simple_user_adding_requirements_check = new Simple_User_Adding_Requirements_Check( array(
-	'title' => 'Simple User Adding',
-	'php'   => '5.3',
-	'wp'    => '3.1',
-	'file'  => __FILE__,
-));
-
-if ( $simple_user_adding_requirements_check->passes() ) {
-	// Pull in the plugin classes and initialize
-	include( dirname( __FILE__ ) . '/lib/wp-stack-plugin.php' );
-	include( dirname( __FILE__ ) . '/classes/plugin.php' );
-	Simple_User_Adding_Plugin::start( __FILE__ );
+if ( file_exists( dirname( __FILE__ ) . '/vendor/autoload.php' ) ) {
+	require dirname( __FILE__ ) . '/vendor/autoload.php';
 }
 
-unset( $simple_user_adding_requirements_check );
+$requirements_check = new WP_Requirements_Check( array(
+	'title' => 'Simple User Adding',
+	'php'   => '5.3',
+	'wp'    => '4.0',
+	'file'  => __FILE__,
+) );
+
+if ( $requirements_check->passes() ) {
+	include( dirname( __FILE__ ) . '/init.php' );
+}
+
+unset( $requirements_check );
