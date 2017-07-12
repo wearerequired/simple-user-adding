@@ -1,9 +1,8 @@
 # Simple User Adding #
 Contributors:      wearerequired, swissspidy  
-Donate link:       http://required.ch  
 Tags:              admin, email, users, form, registration  
 Requires at least: 3.1  
-Tested up to:      4.4  
+Tested up to:      4.6  
 Stable tag:        1.1.1  
 License:           GPLv2 or later  
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html  
@@ -51,7 +50,7 @@ Not 100% yet, but we’re working on it!
 
 If you would like to contribute to this plugin, report an isse or anything like that, please note that we develop this plugin on [GitHub](https://github.com/wearerequired/simple-user-adding).
 
-Developed by [required+](http://required.ch/ "Team of experienced web professionals from Switzerland & Germany")
+Developed by [required](https://required.com/ "Team of experienced web professionals from Switzerland & Germany")
 
 ## Changelog ##
 
